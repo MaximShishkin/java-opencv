@@ -5,13 +5,12 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class ConnectionDB {
-
-    public ConnectionDB() {
-		testDatabase();
+public class ConnectToDB {
+    public ConnectToDB() {
+        connectionDB();
     }
 
-    private void testDatabase() {
+    private void connectionDB() {
         try {
             Class.forName("org.postgresql.Driver");
             String url = "jdbc:postgresql://localhost:5432/postgres";
@@ -19,7 +18,6 @@ public class ConnectionDB {
             String password = "123";
             Connection con = DriverManager.getConnection(url, login, password);
             try {
-
                 Statement stmt = con.createStatement();
                 ResultSet rs = stmt.executeQuery(" SELECT * FROM weather");
                 while (rs.next()) {
