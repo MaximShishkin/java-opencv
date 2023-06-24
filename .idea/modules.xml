@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ConnectionDB.iml" filepath="$PROJECT_DIR$/ConnectionDB.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OpenCV.iml" filepath="$PROJECT_DIR$/OpenCV.iml" />
     </modules>
   </component>
 </project>
