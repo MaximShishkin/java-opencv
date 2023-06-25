@@ -1,6 +1,7 @@
 package ru.shishkin.openCV;
 
 import java.util.ArrayList;
+
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
@@ -21,13 +22,15 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class laba1 extends Application{
+public class laba1 extends Application {
     static {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
     }
+
     public static void main(String[] args) {
         Application.launch(args);
     }
+
     public void start(Stage stage) throws Exception {
         VBox root = new VBox(15.0);
         root.setAlignment(Pos.CENTER);
@@ -132,9 +135,12 @@ public class laba1 extends Application{
         Mat imgInv = new Mat();
         Core.LUT(img3, lut, imgInv);
         CvUtilsFX.showImage(imgInv, "Илон Маск с ADAPTIVE_THRESH_MEAN_C + Inv");
-        img.release(); img2.release();
-        img3.release(); img4.release();
-        imgInv.release(); lut.release();
+        img.release();
+        img2.release();
+        img3.release();
+        img4.release();
+        imgInv.release();
+        lut.release();
     }
 
     private void onClickButton2(ActionEvent e) {
@@ -148,7 +154,7 @@ public class laba1 extends Application{
         Mat imgHSV1 = new Mat();
         Imgproc.cvtColor(img, imgHSV1, Imgproc.COLOR_BGR2HSV);
         Core.add(imgHSV1, new Scalar(0, 0, -40), imgHSV1);
-        Mat imgBGR1= new Mat();
+        Mat imgBGR1 = new Mat();
         Imgproc.cvtColor(imgHSV1, imgBGR1, Imgproc.COLOR_HSV2BGR);
         // Увеличение яркости
         Mat imgHSV = new Mat();
@@ -245,10 +251,10 @@ public class laba1 extends Application{
         Mat histRed = new Mat();
         Mat histGreen = new Mat();
         Mat histBlue = new Mat();
-        Imgproc.calcHist(images, new MatOfInt(3), new Mat(),histGray, new MatOfInt(256), new MatOfFloat(0, 256));
-        Imgproc.calcHist(images, new MatOfInt(2), new Mat(),histRed, new MatOfInt(256), new MatOfFloat(0, 256));
-        Imgproc.calcHist(images, new MatOfInt(1), new Mat(),histGreen, new MatOfInt(256), new MatOfFloat(0, 256));
-        Imgproc.calcHist(images, new MatOfInt(0), new Mat(),histBlue, new MatOfInt(256), new MatOfFloat(0, 256));
+        Imgproc.calcHist(images, new MatOfInt(3), new Mat(), histGray, new MatOfInt(256), new MatOfFloat(0, 256));
+        Imgproc.calcHist(images, new MatOfInt(2), new Mat(), histRed, new MatOfInt(256), new MatOfFloat(0, 256));
+        Imgproc.calcHist(images, new MatOfInt(1), new Mat(), histGreen, new MatOfInt(256), new MatOfFloat(0, 256));
+        Imgproc.calcHist(images, new MatOfInt(0), new Mat(), histBlue, new MatOfInt(256), new MatOfFloat(0, 256));
         // Нормализация диапазона
         Core.normalize(histGray, histGray, 0, 128, Core.NORM_MINMAX);
         Core.normalize(histRed, histRed, 0, 128, Core.NORM_MINMAX);
@@ -264,30 +270,35 @@ public class laba1 extends Application{
         for (int i = 0, j = histGray.rows(); i < j; i++) {
             v = Math.round(histRed.get(i, 0)[0]);
             if (v != 0) {
-                Imgproc.line(imgHistRed, new Point(i, h - 1),new Point(i, h - 1 - v), CvUtils.COLOR_RED);
+                Imgproc.line(imgHistRed, new Point(i, h - 1), new Point(i, h - 1 - v), CvUtils.COLOR_RED);
             }
             v = Math.round(histGreen.get(i, 0)[0]);
             if (v != 0) {
-                Imgproc.line(imgHistGreen, new Point(i, h - 1),new Point(i, h - 1 - v), CvUtils.COLOR_GREEN);
+                Imgproc.line(imgHistGreen, new Point(i, h - 1), new Point(i, h - 1 - v), CvUtils.COLOR_GREEN);
             }
             v = Math.round(histBlue.get(i, 0)[0]);
             if (v != 0) {
-                Imgproc.line(imgHistBlue, new Point(i, h - 1),new Point(i, h - 1 - v), CvUtils.COLOR_BLUE);
+                Imgproc.line(imgHistBlue, new Point(i, h - 1), new Point(i, h - 1 - v), CvUtils.COLOR_BLUE);
             }
             v = Math.round(histGray.get(i, 0)[0]);
             if (v != 0) {
-                Imgproc.line(imgHistGray, new Point(i, h - 1),new Point(i, h - 1 - v), CvUtils.COLOR_GRAY);
+                Imgproc.line(imgHistGray, new Point(i, h - 1), new Point(i, h - 1 - v), CvUtils.COLOR_GRAY);
             }
         }
         CvUtilsFX.showImage(imgHistRed, "Red");
         CvUtilsFX.showImage(imgHistGreen, "Green");
         CvUtilsFX.showImage(imgHistBlue, "Blue");
         CvUtilsFX.showImage(imgHistGray, "Gray");
-        img.release(); imgGray.release();
-        imgHistRed.release(); imgHistGreen.release();
-        imgHistBlue.release(); imgHistGray.release();
-        histGray.release(); histRed.release();
-        histGreen.release(); histBlue.release();
+        img.release();
+        imgGray.release();
+        imgHistRed.release();
+        imgHistGreen.release();
+        imgHistBlue.release();
+        imgHistGray.release();
+        histGray.release();
+        histRed.release();
+        histGreen.release();
+        histBlue.release();
     }
 
     private void onClickButton6(ActionEvent e) {
@@ -336,9 +347,13 @@ public class laba1 extends Application{
         CvUtilsFX.showImage(imgHist, "Гистограмма до");
         CvUtilsFX.showImage(img3, "CLAHE");
         CvUtilsFX.showImage(imgHist2, "Гистограмма после");
-        img.release(); img2.release(); img3.release();
-        imgHist.release(); imgHist2.release();
-        hist.release(); hist2.release();
+        img.release();
+        img2.release();
+        img3.release();
+        imgHist.release();
+        imgHist2.release();
+        hist.release();
+        hist2.release();
     }
 
     private void onClickButton7(ActionEvent e) {
@@ -401,7 +416,7 @@ public class laba1 extends Application{
             return;
         }
         CvUtilsFX.showImage(img, "Илон Маск");
-        Mat kernel = Imgproc.getStructuringElement(Imgproc.MORPH_RECT,new Size(3, 3));
+        Mat kernel = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new Size(3, 3));
         Mat img2 = new Mat();
         Imgproc.dilate(img, img2, kernel);
         CvUtilsFX.showImage(img2, "Илон Маск с дилатацией");
@@ -409,5 +424,4 @@ public class laba1 extends Application{
         Imgproc.erode(img, img3, kernel);
         CvUtilsFX.showImage(img3, "Илон Маск с эрозией");
     }
-
 }

@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
+
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.Scalar;
@@ -20,36 +21,36 @@ public class CvUtils {
     public static final Scalar COLOR_GREEN = colorRGB(0, 128, 0);
     public static final Scalar COLOR_YELLOW = colorRGB(255, 255, 0);
     public static final Scalar COLOR_GRAY = colorRGB(128, 128, 128);
+
     public static Scalar colorRGB(double red, double green, double blue) {
         return new Scalar(blue, green, red);
     }
+
     public static Scalar colorRGB(java.awt.Color c) {
         return new Scalar(c.getBlue(), c.getGreen(), c.getRed());
     }
-    public static Scalar colorRGBA(double red, double green, double blue,
-                                   double alpha) {
+
+    public static Scalar colorRGBA(double red, double green, double blue, double alpha) {
         return new Scalar(blue, green, red, alpha);
     }
+
     public static Scalar colorRGBA(java.awt.Color c) {
-        return new Scalar(c.getBlue(), c.getGreen(),
-                c.getRed(), c.getAlpha());
+        return new Scalar(c.getBlue(), c.getGreen(), c.getRed(), c.getAlpha());
     }
 
     public static BufferedImage MatToBufferedImage(Mat m) {
         // Листинг 3.1
         if (m == null || m.empty()) return null;
-        if (m.depth() == CvType.CV_8U) {}
-        else if (m.depth() == CvType.CV_16U) { // CV_16U => CV_8U
+        if (m.depth() == CvType.CV_8U) {
+        } else if (m.depth() == CvType.CV_16U) { // CV_16U => CV_8U
             Mat m_16 = new Mat();
             m.convertTo(m_16, CvType.CV_8U, 255.0 / 65535);
             m = m_16;
-        }
-        else if (m.depth() == CvType.CV_32F) { // CV_32F => CV_8U
+        } else if (m.depth() == CvType.CV_32F) { // CV_32F => CV_8U
             Mat m_32 = new Mat();
             m.convertTo(m_32, CvType.CV_8U, 255);
             m = m_32;
-        }
-        else return null;
+        } else return null;
         int type = 0;
         if (m.channels() == 1) type = BufferedImage.TYPE_BYTE_GRAY;
         else if (m.channels() == 3) type = BufferedImage.TYPE_3BYTE_BGR;
@@ -80,14 +81,11 @@ public class CvUtils {
         int type = 0;
         if (img.getType() == BufferedImage.TYPE_BYTE_GRAY) {
             type = CvType.CV_8UC1;
-        }
-        else if (img.getType() == BufferedImage.TYPE_3BYTE_BGR) {
+        } else if (img.getType() == BufferedImage.TYPE_3BYTE_BGR) {
             type = CvType.CV_8UC3;
-        }
-        else if (img.getType() == BufferedImage.TYPE_4BYTE_ABGR) {
+        } else if (img.getType() == BufferedImage.TYPE_4BYTE_ABGR) {
             type = CvType.CV_8UC4;
-        }
-        else return new Mat();
+        } else return new Mat();
         Mat m = new Mat(img.getHeight(), img.getWidth(), type);
         byte[] data =
                 ((DataBufferByte) img.getRaster().getDataBuffer()).getData();
@@ -112,18 +110,16 @@ public class CvUtils {
         // Листинг 3.6
         if (m == null || m.empty()) return false;
         if (path == null || path.length() < 5 || !path.endsWith(".mat")) return false;
-        if (m.depth() == CvType.CV_8U) {}
-        else if (m.depth() == CvType.CV_16U) {
+        if (m.depth() == CvType.CV_8U) {
+        } else if (m.depth() == CvType.CV_16U) {
             Mat m_16 = new Mat();
             m.convertTo(m_16, CvType.CV_8U, 255.0 / 65535);
             m = m_16;
-        }
-        else if (m.depth() == CvType.CV_32F) {
+        } else if (m.depth() == CvType.CV_32F) {
             Mat m_32 = new Mat();
             m.convertTo(m_32, CvType.CV_8U, 255);
             m = m_32;
-        }
-        else return false;
+        } else return false;
         if (m.channels() == 2 || m.channels() > 4) return false;
         byte[] buf = new byte[m.channels() * m.cols() * m.rows()];
         m.get(0, 0, buf);
@@ -131,8 +127,7 @@ public class CvUtils {
                 OutputStream out = new FileOutputStream(path);
                 BufferedOutputStream bout = new BufferedOutputStream(out);
                 DataOutputStream dout = new DataOutputStream(bout);
-        )
-        {
+        ) {
             dout.writeInt(m.rows());
             dout.writeInt(m.cols());
             dout.writeInt(m.channels());
@@ -154,8 +149,7 @@ public class CvUtils {
                 InputStream in = new FileInputStream(path);
                 BufferedInputStream bin = new BufferedInputStream(in);
                 DataInputStream din = new DataInputStream(bin);
-        )
-        {
+        ) {
             int rows = din.readInt();
             if (rows < 1) return new Mat();
             int cols = din.readInt();
@@ -164,14 +158,11 @@ public class CvUtils {
             int type = 0;
             if (ch == 1) {
                 type = CvType.CV_8UC1;
-            }
-            else if (ch == 3) {
+            } else if (ch == 3) {
                 type = CvType.CV_8UC3;
-            }
-            else if (ch == 4) {
+            } else if (ch == 4) {
                 type = CvType.CV_8UC4;
-            }
-            else return new Mat();
+            } else return new Mat();
             int size = ch * cols * rows;
             byte[] buf = new byte[size];
             int rsize = din.read(buf);
@@ -179,7 +170,8 @@ public class CvUtils {
             Mat m = new Mat(rows, cols, type);
             m.put(0, 0, buf);
             return m;
-        } catch (Exception e) { }
+        } catch (Exception e) {
+        }
         return new Mat();
     }
 
@@ -200,5 +192,4 @@ public class CvUtils {
         window.setLocationRelativeTo(null);
         window.setVisible(true);
     }
-
 }
