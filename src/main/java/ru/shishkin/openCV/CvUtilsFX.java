@@ -1,7 +1,5 @@
 package ru.shishkin.openCV;
 
-import java.awt.image.BufferedImage;
-
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.Scalar;

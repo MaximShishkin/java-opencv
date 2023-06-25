@@ -69,8 +69,7 @@ public class CvUtils {
             }
         }
         BufferedImage image = new BufferedImage(m.cols(), m.rows(), type);
-        byte[] data =
-                ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
+        byte[] data = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
         System.arraycopy(buf, 0, data, 0, buf.length);
         return image;
     }
@@ -186,9 +185,11 @@ public class CvUtils {
         JLabel label = new JLabel(imageIcon);
         JScrollPane pane = new JScrollPane(label);
         window.setContentPane(pane);
+
         if (im.getWidth() < w && im.getHeight() < h) {
             window.pack();
         }
+
         window.setLocationRelativeTo(null);
         window.setVisible(true);
     }

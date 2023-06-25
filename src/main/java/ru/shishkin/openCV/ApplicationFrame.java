@@ -13,7 +13,6 @@ import org.opencv.core.Size;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.CLAHE;
 import org.opencv.imgproc.Imgproc;
-import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
@@ -22,13 +21,13 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class laba1 extends Application {
+public class ApplicationFrame extends javafx.application.Application {
     static {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
     }
 
     public static void main(String[] args) {
-        Application.launch(args);
+        javafx.application.Application.launch(args);
     }
 
     public void start(Stage stage) throws Exception {
@@ -81,6 +80,7 @@ public class laba1 extends Application {
         stage.setOnCloseRequest(event -> {
             Platform.exit();
         });
+
         stage.show();
     }
 
