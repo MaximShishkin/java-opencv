@@ -13,7 +13,7 @@ import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.Scalar;
 
-public class CvUtils {
+public class OpenCVUtils {
     public static final Scalar COLOR_BLACK = colorRGB(0, 0, 0);
     public static final Scalar COLOR_WHITE = colorRGB(255, 255, 255);
     public static final Scalar COLOR_RED = colorRGB(255, 0, 0);

@@ -10,7 +10,7 @@ import javafx.scene.image.*;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class CvUtilsFX {
+public class FrameUtils {
     public static Scalar colorRGB(javafx.scene.paint.Color c) {
         return new Scalar((double) Math.round(c.getBlue() * 255),
                 (double) Math.round(c.getGreen() * 255),

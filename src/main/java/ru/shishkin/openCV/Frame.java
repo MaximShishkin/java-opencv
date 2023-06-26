@@ -1,5 +1,7 @@
 package ru.shishkin.opencv;
 
+import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
 import org.opencv.core.Core;
@@ -13,75 +15,56 @@ import org.opencv.core.Size;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.CLAHE;
 import org.opencv.imgproc.Imgproc;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
-public class Frame extends javafx.application.Application {
-    static {
-        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-    }
+import javax.swing.*;
 
-    public static void main(String[] args) {
-        javafx.application.Application.launch(args);
-    }
-
-    public void start(Stage stage) throws Exception {
-        VBox root = new VBox(15.0);
-        root.setAlignment(Pos.CENTER);
-
+public class Frame extends JFrame {
+    public Frame() {
         Button button = new Button("Получить чёрно-белое изображение");
-        button.setOnAction(this::onClickButton);
-        root.getChildren().add(button);
+        button.addActionListener(this::onClickButton);
+        add(button);
 
         Button button1 = new Button("Cоздать черно-белый контур");
-        button1.setOnAction(this::onClickButton1);
-        root.getChildren().add(button1);
+        button1.addActionListener(this::onClickButton1);
+        add(button1);
 
         Button button2 = new Button("Увеличение и уменьшение яркости");
-        button2.setOnAction(this::onClickButton2);
-        root.getChildren().add(button2);
+        button2.addActionListener(this::onClickButton2);
+        add(button2);
 
         Button button3 = new Button("Увеличение и уменьшение насыщенности");
-        button3.setOnAction(this::onClickButton3);
-        root.getChildren().add(button3);
+        button3.addActionListener(this::onClickButton3);
+        add(button3);
 
         Button button4 = new Button("Изменение цветового баланса");
-        button4.setOnAction(this::onClickButton4);
-        root.getChildren().add(button4);
+        button4.addActionListener(this::onClickButton4);
+        add(button4);
 
         Button button5 = new Button("Вычисление гистограммы");
-        button5.setOnAction(this::onClickButton5);
-        root.getChildren().add(button5);
+        button5.addActionListener(this::onClickButton5);
+        add(button5);
 
         Button button6 = new Button("Изменение гистрограммы");
-        button6.setOnAction(this::onClickButton6);
-        root.getChildren().add(button6);
+        button6.addActionListener(this::onClickButton6);
+        add(button6);
 
         Button button7 = new Button("Медианный фильтр");
-        button7.setOnAction(this::onClickButton7);
-        root.getChildren().add(button7);
+        button7.addActionListener(this::onClickButton7);
+        add(button7);
 
         Button button8 = new Button("Поиск прямых линий");
-        button8.setOnAction(this::onClickButton8);
-        root.getChildren().add(button8);
+        button8.addActionListener(this::onClickButton8);
+        add(button8);
 
         Button button9 = new Button("Эрозия и дилатация");
-        button9.setOnAction(this::onClickButton9);
-        root.getChildren().add(button9);
+        button9.addActionListener(this::onClickButton9);
+        add(button9);
 
-        Scene scene = new Scene(root, 330.0, 410.0);
-        stage.setTitle("OpenCV " + Core.VERSION);
-        stage.setScene(scene);
-        stage.setOnCloseRequest(event -> {
-            Platform.exit();
-        });
-
-        stage.show();
+        setTitle("OpenCV " + Core.VERSION);
+        setLayout(null);
+        setBounds(50, 50,330,410);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
     }
 
     private void onClickButton(ActionEvent e) {
@@ -97,8 +80,8 @@ public class Frame extends javafx.application.Application {
         double thresh = Imgproc.threshold(img2, img3, 100, 255,
                 Imgproc.THRESH_BINARY | Imgproc.THRESH_OTSU);
         System.out.println(thresh);
-        CvUtilsFX.showImage(img, "Илон Маск");
-        CvUtilsFX.showImage(img3, "Илон Маск с THRESH_OTSU");
+        FrameUtils.showImage(img, "Илон Маск");
+        FrameUtils.showImage(img3, "Илон Маск с THRESH_OTSU");
         img.release();
         img2.release();
         img3.release();
@@ -121,9 +104,9 @@ public class Frame extends javafx.application.Application {
         Imgproc.adaptiveThreshold(img2, img4, 255,
                 Imgproc.ADAPTIVE_THRESH_GAUSSIAN_C,
                 Imgproc.THRESH_BINARY_INV, 3, 5);
-        CvUtilsFX.showImage(img, "Илон Маск");
-        CvUtilsFX.showImage(img3, "Илонс Маск с ADAPTIVE_THRESH_MEAN_C");
-        CvUtilsFX.showImage(img4, "Илон Маск с ADAPTIVE_THRESH_GAUSSIAN_C + THRESH_BINARY_INV");
+        FrameUtils.showImage(img, "Илон Маск");
+        FrameUtils.showImage(img3, "Илонс Маск с ADAPTIVE_THRESH_MEAN_C");
+        FrameUtils.showImage(img4, "Илон Маск с ADAPTIVE_THRESH_GAUSSIAN_C + THRESH_BINARY_INV");
         // Инверсия с помощью таблицы соответствия
         Mat lut = new Mat(1, 256, CvType.CV_8UC1);
         byte[] arr = new byte[256];
@@ -134,7 +117,7 @@ public class Frame extends javafx.application.Application {
         // Преобразование в соответствии с таблицей
         Mat imgInv = new Mat();
         Core.LUT(img3, lut, imgInv);
-        CvUtilsFX.showImage(imgInv, "Илон Маск с ADAPTIVE_THRESH_MEAN_C + Inv");
+        FrameUtils.showImage(imgInv, "Илон Маск с ADAPTIVE_THRESH_MEAN_C + Inv");
         img.release();
         img2.release();
         img3.release();
@@ -162,9 +145,9 @@ public class Frame extends javafx.application.Application {
         Core.add(imgHSV, new Scalar(0, 0, 40), imgHSV);
         Mat imgBGR = new Mat();
         Imgproc.cvtColor(imgHSV, imgBGR, Imgproc.COLOR_HSV2BGR);
-        CvUtilsFX.showImage(img, "Илон Маск");
-        CvUtilsFX.showImage(imgBGR, "Илон Маск с Яркостью +40");
-        CvUtilsFX.showImage(imgBGR1, "Илон Маск с Яркостью -40");
+        FrameUtils.showImage(img, "Илон Маск");
+        FrameUtils.showImage(imgBGR, "Илон Маск с Яркостью +40");
+        FrameUtils.showImage(imgBGR1, "Илон Маск с Яркостью -40");
         img.release();
         imgHSV.release();
         imgHSV1.release();
@@ -193,9 +176,9 @@ public class Frame extends javafx.application.Application {
         Mat imgBGR1 = new Mat();
         Imgproc.cvtColor(imgHSV1, imgBGR1, Imgproc.COLOR_HSV2BGR);
 
-        CvUtilsFX.showImage(img, "Илон Маск");
-        CvUtilsFX.showImage(imgBGR, "Илон Маск с насыщенностью +40");
-        CvUtilsFX.showImage(imgBGR1, "Илон Маск с насыщенностью -40");
+        FrameUtils.showImage(img, "Илон Маск");
+        FrameUtils.showImage(imgBGR, "Илон Маск с насыщенностью +40");
+        FrameUtils.showImage(imgBGR1, "Илон Маск с насыщенностью -40");
         img.release();
         imgHSV.release();
         imgHSV1.release();
@@ -223,9 +206,9 @@ public class Frame extends javafx.application.Application {
         Core.add(imgLab1, new Scalar(0, 0, 20), imgLab1);
         Mat imgBGR1 = new Mat();
         Imgproc.cvtColor(imgLab1, imgBGR1, Imgproc.COLOR_Lab2BGR);
-        CvUtilsFX.showImage(img, "Илон Маск");
-        CvUtilsFX.showImage(imgBGR, "Синий Илон Маск");
-        CvUtilsFX.showImage(imgBGR1, "Жёлтый Илон Маск");
+        FrameUtils.showImage(img, "Илон Маск");
+        FrameUtils.showImage(imgBGR, "Синий Илон Маск");
+        FrameUtils.showImage(imgBGR1, "Жёлтый Илон Маск");
         img.release();
         imgLab.release();
         imgLab1.release();
@@ -240,7 +223,7 @@ public class Frame extends javafx.application.Application {
             System.out.println("Не удалось загрузить изображение");
             return;
         }
-        CvUtilsFX.showImage(img, "Оригинал");
+        FrameUtils.showImage(img, "Оригинал");
         Mat imgGray = new Mat();
         Imgproc.cvtColor(img, imgGray, Imgproc.COLOR_BGR2GRAY);
         // Вычисляем гистограммы по каналам
@@ -263,32 +246,32 @@ public class Frame extends javafx.application.Application {
         // Отрисовка гистограмм
         double v = 0;
         int h = 150;
-        Mat imgHistRed = new Mat(h, 256, CvType.CV_8UC3, CvUtils.COLOR_WHITE);
-        Mat imgHistGreen = new Mat(h, 256, CvType.CV_8UC3, CvUtils.COLOR_WHITE);
-        Mat imgHistBlue = new Mat(h, 256, CvType.CV_8UC3, CvUtils.COLOR_WHITE);
-        Mat imgHistGray = new Mat(h, 256, CvType.CV_8UC3, CvUtils.COLOR_WHITE);
+        Mat imgHistRed = new Mat(h, 256, CvType.CV_8UC3, OpenCVUtils.COLOR_WHITE);
+        Mat imgHistGreen = new Mat(h, 256, CvType.CV_8UC3, OpenCVUtils.COLOR_WHITE);
+        Mat imgHistBlue = new Mat(h, 256, CvType.CV_8UC3, OpenCVUtils.COLOR_WHITE);
+        Mat imgHistGray = new Mat(h, 256, CvType.CV_8UC3, OpenCVUtils.COLOR_WHITE);
         for (int i = 0, j = histGray.rows(); i < j; i++) {
             v = Math.round(histRed.get(i, 0)[0]);
             if (v != 0) {
-                Imgproc.line(imgHistRed, new Point(i, h - 1), new Point(i, h - 1 - v), CvUtils.COLOR_RED);
+                Imgproc.line(imgHistRed, new Point(i, h - 1), new Point(i, h - 1 - v), OpenCVUtils.COLOR_RED);
             }
             v = Math.round(histGreen.get(i, 0)[0]);
             if (v != 0) {
-                Imgproc.line(imgHistGreen, new Point(i, h - 1), new Point(i, h - 1 - v), CvUtils.COLOR_GREEN);
+                Imgproc.line(imgHistGreen, new Point(i, h - 1), new Point(i, h - 1 - v), OpenCVUtils.COLOR_GREEN);
             }
             v = Math.round(histBlue.get(i, 0)[0]);
             if (v != 0) {
-                Imgproc.line(imgHistBlue, new Point(i, h - 1), new Point(i, h - 1 - v), CvUtils.COLOR_BLUE);
+                Imgproc.line(imgHistBlue, new Point(i, h - 1), new Point(i, h - 1 - v), OpenCVUtils.COLOR_BLUE);
             }
             v = Math.round(histGray.get(i, 0)[0]);
             if (v != 0) {
-                Imgproc.line(imgHistGray, new Point(i, h - 1), new Point(i, h - 1 - v), CvUtils.COLOR_GRAY);
+                Imgproc.line(imgHistGray, new Point(i, h - 1), new Point(i, h - 1 - v), OpenCVUtils.COLOR_GRAY);
             }
         }
-        CvUtilsFX.showImage(imgHistRed, "Red");
-        CvUtilsFX.showImage(imgHistGreen, "Green");
-        CvUtilsFX.showImage(imgHistBlue, "Blue");
-        CvUtilsFX.showImage(imgHistGray, "Gray");
+        FrameUtils.showImage(imgHistRed, "Red");
+        FrameUtils.showImage(imgHistGreen, "Green");
+        FrameUtils.showImage(imgHistBlue, "Blue");
+        FrameUtils.showImage(imgHistGray, "Gray");
         img.release();
         imgGray.release();
         imgHistRed.release();
@@ -329,24 +312,24 @@ public class Frame extends javafx.application.Application {
         Core.normalize(hist2, hist2, 0, 128, Core.NORM_MINMAX);
         double v = 0;
         int h = 150;
-        Mat imgHist = new Mat(h, 256, CvType.CV_8UC3, CvUtils.COLOR_WHITE);
-        Mat imgHist2 = new Mat(h, 256, CvType.CV_8UC3, CvUtils.COLOR_WHITE);
+        Mat imgHist = new Mat(h, 256, CvType.CV_8UC3, OpenCVUtils.COLOR_WHITE);
+        Mat imgHist2 = new Mat(h, 256, CvType.CV_8UC3, OpenCVUtils.COLOR_WHITE);
         for (int i = 0, j = hist.rows(); i < j; i++) {
             v = Math.round(hist.get(i, 0)[0]);
             if (v != 0) {
                 Imgproc.line(imgHist, new Point(i, h - 1),
-                        new Point(i, h - 1 - v), CvUtils.COLOR_BLACK);
+                        new Point(i, h - 1 - v), OpenCVUtils.COLOR_BLACK);
             }
             v = Math.round(hist2.get(i, 0)[0]);
             if (v != 0) {
                 Imgproc.line(imgHist2, new Point(i, h - 1),
-                        new Point(i, h - 1 - v), CvUtils.COLOR_BLACK);
+                        new Point(i, h - 1 - v), OpenCVUtils.COLOR_BLACK);
             }
         }
-        CvUtilsFX.showImage(img2, "Оригинал");
-        CvUtilsFX.showImage(imgHist, "Гистограмма до");
-        CvUtilsFX.showImage(img3, "CLAHE");
-        CvUtilsFX.showImage(imgHist2, "Гистограмма после");
+        FrameUtils.showImage(img2, "Оригинал");
+        FrameUtils.showImage(imgHist, "Гистограмма до");
+        FrameUtils.showImage(img3, "CLAHE");
+        FrameUtils.showImage(imgHist2, "Гистограмма после");
         img.release();
         img2.release();
         img3.release();
@@ -364,15 +347,15 @@ public class Frame extends javafx.application.Application {
             return;
         }
         Mat img2 = new Mat();
-        CvUtilsFX.showImage(img, "Илон Маск");
+        FrameUtils.showImage(img, "Илон Маск");
         Imgproc.medianBlur(img, img2, 3);
-        CvUtilsFX.showImage(img2, "Илон Маск с параметром фильтра 3");
+        FrameUtils.showImage(img2, "Илон Маск с параметром фильтра 3");
         Mat img3 = new Mat();
         Imgproc.medianBlur(img, img3, 5);
-        CvUtilsFX.showImage(img3, "Илон Маск с параметром фильтра 5");
+        FrameUtils.showImage(img3, "Илон Маск с параметром фильтра 5");
         Mat img4 = new Mat();
         Imgproc.medianBlur(img, img4, 45);
-        CvUtilsFX.showImage(img4, "Илон Маск с параметром фильтра 45");
+        FrameUtils.showImage(img4, "Илон Маск с параметром фильтра 45");
         img.release();
         img2.release();
         img3.release();
@@ -390,18 +373,18 @@ public class Frame extends javafx.application.Application {
         Imgproc.cvtColor(img, imgGray, Imgproc.COLOR_BGR2GRAY);
         Mat edges = new Mat();
         Imgproc.Canny(imgGray, edges, 80, 200);
-        CvUtilsFX.showImage(edges, "Илон Маск с применением Canny");
+        FrameUtils.showImage(edges, "Илон Маск с применением Canny");
         Mat lines = new Mat();
         Imgproc.HoughLinesP(edges, lines, 1, Math.toRadians(2), 20, 30, 0);
-        Mat result = new Mat(img.size(), CvType.CV_8UC3, CvUtils.COLOR_WHITE);
+        Mat result = new Mat(img.size(), CvType.CV_8UC3, OpenCVUtils.COLOR_WHITE);
         for (int i = 0, r = lines.rows(); i < r; i++) {
             for (int j = 0, c = lines.cols(); j < c; j++) {
                 double[] line = lines.get(i, j);
                 Imgproc.line(result, new Point(line[0], line[1]),
-                        new Point(line[2], line[3]), CvUtils.COLOR_BLACK);
+                        new Point(line[2], line[3]), OpenCVUtils.COLOR_BLACK);
             }
         }
-        CvUtilsFX.showImage(result, "Результат поиска прямых линий");
+        FrameUtils.showImage(result, "Результат поиска прямых линий");
         img.release();
         imgGray.release();
         edges.release();
@@ -415,13 +398,13 @@ public class Frame extends javafx.application.Application {
             System.out.println("Не удалось загрузить изображение");
             return;
         }
-        CvUtilsFX.showImage(img, "Илон Маск");
+        FrameUtils.showImage(img, "Илон Маск");
         Mat kernel = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new Size(3, 3));
         Mat img2 = new Mat();
         Imgproc.dilate(img, img2, kernel);
-        CvUtilsFX.showImage(img2, "Илон Маск с дилатацией");
+        FrameUtils.showImage(img2, "Илон Маск с дилатацией");
         Mat img3 = new Mat();
         Imgproc.erode(img, img3, kernel);
-        CvUtilsFX.showImage(img3, "Илон Маск с эрозией");
+        FrameUtils.showImage(img3, "Илон Маск с эрозией");
     }
 }
