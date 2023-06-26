@@ -70,7 +70,6 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ru.shishkin.opencv.Main" />
       <module name="OpenCv" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;\path\to\javafx-sdk-15\lib&quot; --add-modules javafx.controls,javafx.fxml " />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="ru.shishkin.opencv.*" />
