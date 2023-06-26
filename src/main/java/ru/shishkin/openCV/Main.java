@@ -22,17 +22,20 @@ import org.opencv.imgproc.Imgproc;
 
 import java.util.ArrayList;
 
-public class Main extends Application {
+public class Main {
     static {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
     }
 
+    /*
     public static void main(String[] args) {
         Application.launch(args);
     }
 
+     */
+
     public void start(Stage stage) throws Exception {
-        VBox root = new VBox(18.0);
+        VBox root = new VBox(11.0);
         root.setAlignment(Pos.CENTER);
 
         Button button = new Button("Получить чёрно-белое изображение");
