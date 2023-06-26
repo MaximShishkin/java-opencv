@@ -7,32 +7,60 @@ import org.opencv.imgproc.CLAHE;
 import org.opencv.imgproc.Imgproc;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class Panel extends JPanel {
-    private JButton btn1, btn2;
+
 
     public Panel() {
-        btn1 = new JButton();
-        btn1.setText("RESTART");
-        btn1.setForeground(Color.BLUE);
-        btn1.setFont(new Font("serif", 0, 20));
-        btn1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                onnn();
-            }
-        });
-        add(btn1);
 
-        JButton button = new JButton("Получить чёрно-белое изображение");
-        button.addActionListener(this::onnn1);
+
+
+
+        JButton button = new  JButton("Получить чёрно-белое изображение");
+        button.addActionListener(this::onClickButton);
         add(button);
+
+        JButton button1 = new JButton("Cоздать черно-белый контур");
+        button1.addActionListener(this::onClickButton1);
+        add(button1);
+
+        JButton button2 = new JButton("Увеличение и уменьшение яркости");
+        button2.addActionListener(this::onClickButton2);
+        add(button2);
+
+        JButton button3 = new JButton("Увеличение и уменьшение насыщенности");
+        button3.addActionListener(this::onClickButton3);
+        add(button3);
+
+        JButton button4 = new JButton("Изменение цветового баланса");
+        button4.addActionListener(this::onClickButton4);
+        add(button4);
+
+        JButton button5 = new JButton("Вычисление гистограммы");
+        button5.addActionListener(this::onClickButton5);
+        add(button5);
+
+        JButton button6 = new JButton("Изменение гистрограммы");
+        button6.addActionListener(this::onClickButton6);
+        add(button6);
+
+        JButton button7 = new JButton("Медианный фильтр");
+        button7.addActionListener(this::onClickButton7);
+        add(button7);
+
+        JButton button8 = new JButton("Поиск прямых линий");
+        button8.addActionListener(this::onClickButton8);
+        add(button8);
+
+        JButton button9 = new JButton("Эрозия и дилатация");
+        button9.addActionListener(this::onClickButton9);
+        add(button9);
+
     }
 
-    void onnn() {
+    private void onClickButton(ActionEvent e) {
         //Получение чёрно-белого изображения
         Mat img = Imgcodecs.imread("C:\\foto.jpg");
         if (img.empty()) {
@@ -52,47 +80,7 @@ public class Panel extends JPanel {
         img3.release();
     }
 
-    void onnn1(ActionEvent e) {
-        //Получение чёрно-белого изображения
-        Mat img = Imgcodecs.imread("C:\\foto.jpg");
-        if (img.empty()) {
-            System.out.println("Не удалось загрузить изображение");
-            return;
-        }
-        Mat img2 = new Mat();
-        Imgproc.cvtColor(img, img2, Imgproc.COLOR_BGR2GRAY);
-        Mat img3 = new Mat();
-        double thresh = Imgproc.threshold(img2, img3, 100, 255,
-                Imgproc.THRESH_BINARY | Imgproc.THRESH_OTSU);
-        System.out.println(thresh);
-        UtilsFrame.showImage(img, "Илон Маск");
-        UtilsFrame.showImage(img3, "Илон Маск с THRESH_OTSU");
-        img.release();
-        img2.release();
-        img3.release();
-    }
-
-    private void onClickButton(javafx.event.ActionEvent e) {
-        //Получение чёрно-белого изображения
-        Mat img = Imgcodecs.imread("C:\\foto.jpg");
-        if (img.empty()) {
-            System.out.println("Не удалось загрузить изображение");
-            return;
-        }
-        Mat img2 = new Mat();
-        Imgproc.cvtColor(img, img2, Imgproc.COLOR_BGR2GRAY);
-        Mat img3 = new Mat();
-        double thresh = Imgproc.threshold(img2, img3, 100, 255,
-                Imgproc.THRESH_BINARY | Imgproc.THRESH_OTSU);
-        System.out.println(thresh);
-        UtilsFrame.showImage(img, "Илон Маск");
-        UtilsFrame.showImage(img3, "Илон Маск с THRESH_OTSU");
-        img.release();
-        img2.release();
-        img3.release();
-    }
-
-    private void onClickButton1(javafx.event.ActionEvent e) {
+    private void onClickButton1(ActionEvent e) {
         //Cоздание черно-белого контура
         Mat img = Imgcodecs.imread("C:\\foto.jpg");
         if (img.empty()) {
@@ -131,7 +119,7 @@ public class Panel extends JPanel {
         lut.release();
     }
 
-    private void onClickButton2(javafx.event.ActionEvent e) {
+    private void onClickButton2(ActionEvent e) {
         //Изменение яркости
         Mat img = Imgcodecs.imread("C:\\foto.jpg");
         if (img.empty()) {
@@ -160,7 +148,7 @@ public class Panel extends JPanel {
         imgBGR1.release();
     }
 
-    private void onClickButton3(javafx.event.ActionEvent e) {
+    private void onClickButton3(ActionEvent e) {
         //Изменение насыщенности
         Mat img = Imgcodecs.imread("C:\\foto.jpg");
         if (img.empty()) {
@@ -191,7 +179,7 @@ public class Panel extends JPanel {
         imgBGR1.release();
     }
 
-    private void onClickButton4(javafx.event.ActionEvent e) {
+    private void onClickButton4(ActionEvent e) {
         //Изменение цветового баланса
         Mat img = Imgcodecs.imread("C:\\foto.jpg");
         if (img.empty()) {
@@ -221,7 +209,7 @@ public class Panel extends JPanel {
         imgBGR1.release();
     }
 
-    private void onClickButton5(javafx.event.ActionEvent e) {
+    private void onClickButton5(ActionEvent e) {
         //Вычисление гистограммы
         Mat img = Imgcodecs.imread("C:\\foto.jpg");
         if (img.empty()) {
@@ -289,7 +277,7 @@ public class Panel extends JPanel {
         histBlue.release();
     }
 
-    private void onClickButton6(javafx.event.ActionEvent e) {
+    private void onClickButton6(ActionEvent e) {
         //Изменение гистрограммы
         Mat img = Imgcodecs.imread("C:\\foto.jpg");
         if (img.empty()) {
@@ -344,7 +332,7 @@ public class Panel extends JPanel {
         hist2.release();
     }
 
-    private void onClickButton7(javafx.event.ActionEvent e) {
+    private void onClickButton7(ActionEvent e) {
         //Медианный фильтр
         Mat img = Imgcodecs.imread("C:\\foto.jpg");
         if (img.empty()) {
@@ -367,7 +355,7 @@ public class Panel extends JPanel {
         img4.release();
     }
 
-    private void onClickButton8(javafx.event.ActionEvent e) {
+    private void onClickButton8(ActionEvent e) {
         //Поиск прямых линий
         Mat img = Imgcodecs.imread("C:\\foto.jpg");
         if (img.empty()) {
@@ -396,7 +384,7 @@ public class Panel extends JPanel {
         result.release();
     }
 
-    private void onClickButton9(javafx.event.ActionEvent e) {
+    private void onClickButton9(ActionEvent e) {
         //Дилатация и жрозия ищображения
         Mat img = Imgcodecs.imread("C:\\foto.jpg");
         if (img.empty()) {
