@@ -62,7 +62,7 @@ public class Frame extends JFrame {
 
         setTitle("OpenCV " + Core.VERSION);
         setLayout(null);
-        setBounds(50, 50,330,410);
+        setBounds(50, 50, 330, 410);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
@@ -80,8 +80,8 @@ public class Frame extends JFrame {
         double thresh = Imgproc.threshold(img2, img3, 100, 255,
                 Imgproc.THRESH_BINARY | Imgproc.THRESH_OTSU);
         System.out.println(thresh);
-        FrameUtils.showImage(img, "Илон Маск");
-        FrameUtils.showImage(img3, "Илон Маск с THRESH_OTSU");
+        UtilsFrame.showImage(img, "Илон Маск");
+        UtilsFrame.showImage(img3, "Илон Маск с THRESH_OTSU");
         img.release();
         img2.release();
         img3.release();
@@ -104,9 +104,9 @@ public class Frame extends JFrame {
         Imgproc.adaptiveThreshold(img2, img4, 255,
                 Imgproc.ADAPTIVE_THRESH_GAUSSIAN_C,
                 Imgproc.THRESH_BINARY_INV, 3, 5);
-        FrameUtils.showImage(img, "Илон Маск");
-        FrameUtils.showImage(img3, "Илонс Маск с ADAPTIVE_THRESH_MEAN_C");
-        FrameUtils.showImage(img4, "Илон Маск с ADAPTIVE_THRESH_GAUSSIAN_C + THRESH_BINARY_INV");
+        UtilsFrame.showImage(img, "Илон Маск");
+        UtilsFrame.showImage(img3, "Илонс Маск с ADAPTIVE_THRESH_MEAN_C");
+        UtilsFrame.showImage(img4, "Илон Маск с ADAPTIVE_THRESH_GAUSSIAN_C + THRESH_BINARY_INV");
         // Инверсия с помощью таблицы соответствия
         Mat lut = new Mat(1, 256, CvType.CV_8UC1);
         byte[] arr = new byte[256];
@@ -117,7 +117,7 @@ public class Frame extends JFrame {
         // Преобразование в соответствии с таблицей
         Mat imgInv = new Mat();
         Core.LUT(img3, lut, imgInv);
-        FrameUtils.showImage(imgInv, "Илон Маск с ADAPTIVE_THRESH_MEAN_C + Inv");
+        UtilsFrame.showImage(imgInv, "Илон Маск с ADAPTIVE_THRESH_MEAN_C + Inv");
         img.release();
         img2.release();
         img3.release();
@@ -145,9 +145,9 @@ public class Frame extends JFrame {
         Core.add(imgHSV, new Scalar(0, 0, 40), imgHSV);
         Mat imgBGR = new Mat();
         Imgproc.cvtColor(imgHSV, imgBGR, Imgproc.COLOR_HSV2BGR);
-        FrameUtils.showImage(img, "Илон Маск");
-        FrameUtils.showImage(imgBGR, "Илон Маск с Яркостью +40");
-        FrameUtils.showImage(imgBGR1, "Илон Маск с Яркостью -40");
+        UtilsFrame.showImage(img, "Илон Маск");
+        UtilsFrame.showImage(imgBGR, "Илон Маск с Яркостью +40");
+        UtilsFrame.showImage(imgBGR1, "Илон Маск с Яркостью -40");
         img.release();
         imgHSV.release();
         imgHSV1.release();
@@ -176,9 +176,9 @@ public class Frame extends JFrame {
         Mat imgBGR1 = new Mat();
         Imgproc.cvtColor(imgHSV1, imgBGR1, Imgproc.COLOR_HSV2BGR);
 
-        FrameUtils.showImage(img, "Илон Маск");
-        FrameUtils.showImage(imgBGR, "Илон Маск с насыщенностью +40");
-        FrameUtils.showImage(imgBGR1, "Илон Маск с насыщенностью -40");
+        UtilsFrame.showImage(img, "Илон Маск");
+        UtilsFrame.showImage(imgBGR, "Илон Маск с насыщенностью +40");
+        UtilsFrame.showImage(imgBGR1, "Илон Маск с насыщенностью -40");
         img.release();
         imgHSV.release();
         imgHSV1.release();
@@ -206,9 +206,9 @@ public class Frame extends JFrame {
         Core.add(imgLab1, new Scalar(0, 0, 20), imgLab1);
         Mat imgBGR1 = new Mat();
         Imgproc.cvtColor(imgLab1, imgBGR1, Imgproc.COLOR_Lab2BGR);
-        FrameUtils.showImage(img, "Илон Маск");
-        FrameUtils.showImage(imgBGR, "Синий Илон Маск");
-        FrameUtils.showImage(imgBGR1, "Жёлтый Илон Маск");
+        UtilsFrame.showImage(img, "Илон Маск");
+        UtilsFrame.showImage(imgBGR, "Синий Илон Маск");
+        UtilsFrame.showImage(imgBGR1, "Жёлтый Илон Маск");
         img.release();
         imgLab.release();
         imgLab1.release();
@@ -223,7 +223,7 @@ public class Frame extends JFrame {
             System.out.println("Не удалось загрузить изображение");
             return;
         }
-        FrameUtils.showImage(img, "Оригинал");
+        UtilsFrame.showImage(img, "Оригинал");
         Mat imgGray = new Mat();
         Imgproc.cvtColor(img, imgGray, Imgproc.COLOR_BGR2GRAY);
         // Вычисляем гистограммы по каналам
@@ -246,32 +246,32 @@ public class Frame extends JFrame {
         // Отрисовка гистограмм
         double v = 0;
         int h = 150;
-        Mat imgHistRed = new Mat(h, 256, CvType.CV_8UC3, OpenCVUtils.COLOR_WHITE);
-        Mat imgHistGreen = new Mat(h, 256, CvType.CV_8UC3, OpenCVUtils.COLOR_WHITE);
-        Mat imgHistBlue = new Mat(h, 256, CvType.CV_8UC3, OpenCVUtils.COLOR_WHITE);
-        Mat imgHistGray = new Mat(h, 256, CvType.CV_8UC3, OpenCVUtils.COLOR_WHITE);
+        Mat imgHistRed = new Mat(h, 256, CvType.CV_8UC3, UtilsOpenCV.COLOR_WHITE);
+        Mat imgHistGreen = new Mat(h, 256, CvType.CV_8UC3, UtilsOpenCV.COLOR_WHITE);
+        Mat imgHistBlue = new Mat(h, 256, CvType.CV_8UC3, UtilsOpenCV.COLOR_WHITE);
+        Mat imgHistGray = new Mat(h, 256, CvType.CV_8UC3, UtilsOpenCV.COLOR_WHITE);
         for (int i = 0, j = histGray.rows(); i < j; i++) {
             v = Math.round(histRed.get(i, 0)[0]);
             if (v != 0) {
-                Imgproc.line(imgHistRed, new Point(i, h - 1), new Point(i, h - 1 - v), OpenCVUtils.COLOR_RED);
+                Imgproc.line(imgHistRed, new Point(i, h - 1), new Point(i, h - 1 - v), UtilsOpenCV.COLOR_RED);
             }
             v = Math.round(histGreen.get(i, 0)[0]);
             if (v != 0) {
-                Imgproc.line(imgHistGreen, new Point(i, h - 1), new Point(i, h - 1 - v), OpenCVUtils.COLOR_GREEN);
+                Imgproc.line(imgHistGreen, new Point(i, h - 1), new Point(i, h - 1 - v), UtilsOpenCV.COLOR_GREEN);
             }
             v = Math.round(histBlue.get(i, 0)[0]);
             if (v != 0) {
-                Imgproc.line(imgHistBlue, new Point(i, h - 1), new Point(i, h - 1 - v), OpenCVUtils.COLOR_BLUE);
+                Imgproc.line(imgHistBlue, new Point(i, h - 1), new Point(i, h - 1 - v), UtilsOpenCV.COLOR_BLUE);
             }
             v = Math.round(histGray.get(i, 0)[0]);
             if (v != 0) {
-                Imgproc.line(imgHistGray, new Point(i, h - 1), new Point(i, h - 1 - v), OpenCVUtils.COLOR_GRAY);
+                Imgproc.line(imgHistGray, new Point(i, h - 1), new Point(i, h - 1 - v), UtilsOpenCV.COLOR_GRAY);
             }
         }
-        FrameUtils.showImage(imgHistRed, "Red");
-        FrameUtils.showImage(imgHistGreen, "Green");
-        FrameUtils.showImage(imgHistBlue, "Blue");
-        FrameUtils.showImage(imgHistGray, "Gray");
+        UtilsFrame.showImage(imgHistRed, "Red");
+        UtilsFrame.showImage(imgHistGreen, "Green");
+        UtilsFrame.showImage(imgHistBlue, "Blue");
+        UtilsFrame.showImage(imgHistGray, "Gray");
         img.release();
         imgGray.release();
         imgHistRed.release();
@@ -312,24 +312,24 @@ public class Frame extends JFrame {
         Core.normalize(hist2, hist2, 0, 128, Core.NORM_MINMAX);
         double v = 0;
         int h = 150;
-        Mat imgHist = new Mat(h, 256, CvType.CV_8UC3, OpenCVUtils.COLOR_WHITE);
-        Mat imgHist2 = new Mat(h, 256, CvType.CV_8UC3, OpenCVUtils.COLOR_WHITE);
+        Mat imgHist = new Mat(h, 256, CvType.CV_8UC3, UtilsOpenCV.COLOR_WHITE);
+        Mat imgHist2 = new Mat(h, 256, CvType.CV_8UC3, UtilsOpenCV.COLOR_WHITE);
         for (int i = 0, j = hist.rows(); i < j; i++) {
             v = Math.round(hist.get(i, 0)[0]);
             if (v != 0) {
                 Imgproc.line(imgHist, new Point(i, h - 1),
-                        new Point(i, h - 1 - v), OpenCVUtils.COLOR_BLACK);
+                        new Point(i, h - 1 - v), UtilsOpenCV.COLOR_BLACK);
             }
             v = Math.round(hist2.get(i, 0)[0]);
             if (v != 0) {
                 Imgproc.line(imgHist2, new Point(i, h - 1),
-                        new Point(i, h - 1 - v), OpenCVUtils.COLOR_BLACK);
+                        new Point(i, h - 1 - v), UtilsOpenCV.COLOR_BLACK);
             }
         }
-        FrameUtils.showImage(img2, "Оригинал");
-        FrameUtils.showImage(imgHist, "Гистограмма до");
-        FrameUtils.showImage(img3, "CLAHE");
-        FrameUtils.showImage(imgHist2, "Гистограмма после");
+        UtilsFrame.showImage(img2, "Оригинал");
+        UtilsFrame.showImage(imgHist, "Гистограмма до");
+        UtilsFrame.showImage(img3, "CLAHE");
+        UtilsFrame.showImage(imgHist2, "Гистограмма после");
         img.release();
         img2.release();
         img3.release();
@@ -347,15 +347,15 @@ public class Frame extends JFrame {
             return;
         }
         Mat img2 = new Mat();
-        FrameUtils.showImage(img, "Илон Маск");
+        UtilsFrame.showImage(img, "Илон Маск");
         Imgproc.medianBlur(img, img2, 3);
-        FrameUtils.showImage(img2, "Илон Маск с параметром фильтра 3");
+        UtilsFrame.showImage(img2, "Илон Маск с параметром фильтра 3");
         Mat img3 = new Mat();
         Imgproc.medianBlur(img, img3, 5);
-        FrameUtils.showImage(img3, "Илон Маск с параметром фильтра 5");
+        UtilsFrame.showImage(img3, "Илон Маск с параметром фильтра 5");
         Mat img4 = new Mat();
         Imgproc.medianBlur(img, img4, 45);
-        FrameUtils.showImage(img4, "Илон Маск с параметром фильтра 45");
+        UtilsFrame.showImage(img4, "Илон Маск с параметром фильтра 45");
         img.release();
         img2.release();
         img3.release();
@@ -373,18 +373,18 @@ public class Frame extends JFrame {
         Imgproc.cvtColor(img, imgGray, Imgproc.COLOR_BGR2GRAY);
         Mat edges = new Mat();
         Imgproc.Canny(imgGray, edges, 80, 200);
-        FrameUtils.showImage(edges, "Илон Маск с применением Canny");
+        UtilsFrame.showImage(edges, "Илон Маск с применением Canny");
         Mat lines = new Mat();
         Imgproc.HoughLinesP(edges, lines, 1, Math.toRadians(2), 20, 30, 0);
-        Mat result = new Mat(img.size(), CvType.CV_8UC3, OpenCVUtils.COLOR_WHITE);
+        Mat result = new Mat(img.size(), CvType.CV_8UC3, UtilsOpenCV.COLOR_WHITE);
         for (int i = 0, r = lines.rows(); i < r; i++) {
             for (int j = 0, c = lines.cols(); j < c; j++) {
                 double[] line = lines.get(i, j);
                 Imgproc.line(result, new Point(line[0], line[1]),
-                        new Point(line[2], line[3]), OpenCVUtils.COLOR_BLACK);
+                        new Point(line[2], line[3]), UtilsOpenCV.COLOR_BLACK);
             }
         }
-        FrameUtils.showImage(result, "Результат поиска прямых линий");
+        UtilsFrame.showImage(result, "Результат поиска прямых линий");
         img.release();
         imgGray.release();
         edges.release();
@@ -398,13 +398,14 @@ public class Frame extends JFrame {
             System.out.println("Не удалось загрузить изображение");
             return;
         }
-        FrameUtils.showImage(img, "Илон Маск");
+        UtilsFrame.showImage(img, "Илон Маск");
         Mat kernel = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new Size(3, 3));
         Mat img2 = new Mat();
         Imgproc.dilate(img, img2, kernel);
-        FrameUtils.showImage(img2, "Илон Маск с дилатацией");
+        UtilsFrame.showImage(img2, "Илон Маск с дилатацией");
         Mat img3 = new Mat();
         Imgproc.erode(img, img3, kernel);
-        FrameUtils.showImage(img3, "Илон Маск с эрозией");
+        UtilsFrame.showImage(img3, "Илон Маск с эрозией");
     }
+
 }

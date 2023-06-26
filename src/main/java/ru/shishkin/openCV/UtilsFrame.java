@@ -1,5 +1,6 @@
 package ru.shishkin.opencv;
 
+import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.Scalar;
@@ -10,7 +11,11 @@ import javafx.scene.image.*;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class FrameUtils {
+import javax.swing.*;
+import javax.swing.text.html.ImageView;
+import java.awt.*;
+
+public class UtilsFrame {
     public static Scalar colorRGB(javafx.scene.paint.Color c) {
         return new Scalar((double) Math.round(c.getBlue() * 255),
                 (double) Math.round(c.getGreen() * 255),
@@ -71,8 +76,12 @@ public class FrameUtils {
     }
 
     public static void showImage(Mat img, String title) {
+        JFrame window = new JFrame();
+
+        window.setBounds(50, 50,330,410);
+
+
         Image im = MatToImageFX(img);
-        Stage window = new Stage();
         ScrollPane sp = new ScrollPane();
         ImageView iv = new ImageView();
         if (im != null) {
@@ -84,13 +93,13 @@ public class FrameUtils {
                 sp.setPrefHeight(im.getHeight() + 5);
             } else sp.setPrefHeight(700.0);
         }
-        sp.setContent(iv);
-        sp.setPannable(true);
-        BorderPane box = new BorderPane();
-        box.setCenter(sp);
-        Scene scene = new Scene(box);
-        window.setScene(scene);
+
+        sp.addNotify(iv);
+
+        window.add(sp);
         window.setTitle(title);
-        window.show();
+        window.setLayout(null);
+        window.setVisible(true);
     }
+
 }

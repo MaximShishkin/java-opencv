@@ -13,7 +13,7 @@ import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.Scalar;
 
-public class OpenCVUtils {
+public class UtilsOpenCV {
     public static final Scalar COLOR_BLACK = colorRGB(0, 0, 0);
     public static final Scalar COLOR_WHITE = colorRGB(255, 255, 255);
     public static final Scalar COLOR_RED = colorRGB(255, 0, 0);
@@ -40,7 +40,10 @@ public class OpenCVUtils {
 
     public static BufferedImage MatToBufferedImage(Mat m) {
         // Листинг 3.1
-        if (m == null || m.empty()) return null;
+        if (m == null || m.empty()) {
+            return null;
+        }
+
         if (m.depth() == CvType.CV_8U) {
         } else if (m.depth() == CvType.CV_16U) { // CV_16U => CV_8U
             Mat m_16 = new Mat();
@@ -193,4 +196,5 @@ public class OpenCVUtils {
         window.setLocationRelativeTo(null);
         window.setVisible(true);
     }
+
 }
