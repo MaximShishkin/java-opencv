@@ -1,4 +1,4 @@
-package ru.shishkin.openCV;
+package ru.shishkin.opencv;
 
 import java.util.ArrayList;
 
@@ -21,7 +21,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class ApplicationFrame extends javafx.application.Application {
+public class Frame extends javafx.application.Application {
     static {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
     }

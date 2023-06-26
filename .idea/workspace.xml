@@ -31,12 +31,12 @@
     <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.repository.indices" />
   </component>
   <component name="RunManager">
-    <configuration name="ApplicationFrame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ru.shishkin.openCV.ApplicationFrame" />
+    <configuration name="Frame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ru.shishkin.opencv.Frame" />
       <module name="OpenCV" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="ru.shishkin.openCV.*" />
+          <option name="PATTERN" value="ru.shishkin.opencv.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>

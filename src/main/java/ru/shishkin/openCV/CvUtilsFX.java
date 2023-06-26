@@ -1,4 +1,4 @@
-package ru.shishkin.openCV;
+package ru.shishkin.opencv;
 
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
