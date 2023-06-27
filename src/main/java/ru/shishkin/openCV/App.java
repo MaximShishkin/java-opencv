@@ -9,12 +9,14 @@ public class App {
     static {
         nu.pattern.OpenCV.loadLocally();
     }
-
+    /*
     public static void main(String[] args) {
         System.out.println(Core.NATIVE_LIBRARY_NAME);
         System.out.println("Welcome to OpenCV " + Core.VERSION);
 
 
-        new Frame();
+        new Panel();
     }
+
+     */
 }

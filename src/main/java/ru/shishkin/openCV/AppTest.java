@@ -1,5 +1,6 @@
 package ru.shishkin.opencv;
 
+import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
@@ -8,60 +9,71 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.opencv.core.*;
-import org.opencv.core.Point;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.CLAHE;
 import org.opencv.imgproc.Imgproc;
 
 import java.util.ArrayList;
 
-public class Panel {
-    /*
-    public Panel() {
-
-        JButton button = new JButton("Получить черно-белое изображение");
-        button.addActionListener(this::onClickButton);
-        add(button);
-
-        JButton button1 = new JButton("Cоздать черно-белый контур");
-        button1.addActionListener(this::onClickButton1);
-        add(button1);
-
-        JButton button2 = new JButton("Увеличение и уменьшение яркости");
-        button2.addActionListener(this::onClickButton2);
-        add(button2);
-
-        JButton button3 = new JButton("Увеличение и уменьшение насыщенности");
-        button3.addActionListener(this::onClickButton3);
-        add(button3);
-
-        JButton button4 = new JButton("Изменение цветового баланса");
-        button4.addActionListener(this::onClickButton4);
-        add(button4);
-
-        JButton button5 = new JButton("Вычисление гистограммы");
-        button5.addActionListener(this::onClickButton5);
-        add(button5);
-
-        JButton button6 = new JButton("Изменение гистрограммы");
-        button6.addActionListener(this::onClickButton6);
-        add(button6);
-
-        JButton button7 = new JButton("Медианный фильтр");
-        button7.addActionListener(this::onClickButton7);
-        add(button7);
-
-        JButton button8 = new JButton("Поиск прямых линий");
-        button8.addActionListener(this::onClickButton8);
-        add(button8);
-
-        JButton button9 = new JButton("Эрозия и дилатация");
-        button9.addActionListener(this::onClickButton9);
-        add(button9);
-
+public class AppTest extends Application {
+    static {
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
     }
+    public static void main(String[] args) {
+        Application.launch(args);
+    }
+    public void start(Stage stage) throws Exception {
+        VBox root = new VBox(15.0);
+        root.setAlignment(Pos.CENTER);
 
-     */
+        Button button = new Button("Получить чёрно-белое изображение");
+        button.setOnAction(this::onClickButton);
+        root.getChildren().add(button);
+
+        Button button1 = new Button("Cоздать черно-белый контур");
+        button1.setOnAction(this::onClickButton1);
+        root.getChildren().add(button1);
+
+        Button button2 = new Button("Увеличение и уменьшение яркости");
+        button2.setOnAction(this::onClickButton2);
+        root.getChildren().add(button2);
+
+        Button button3 = new Button("Увеличение и уменьшение насыщенности");
+        button3.setOnAction(this::onClickButton3);
+        root.getChildren().add(button3);
+
+        Button button4 = new Button("Изменение цветового баланса");
+        button4.setOnAction(this::onClickButton4);
+        root.getChildren().add(button4);
+
+        Button button5 = new Button("Вычисление гистограммы");
+        button5.setOnAction(this::onClickButton5);
+        root.getChildren().add(button5);
+
+        Button button6 = new Button("Изменение гистрограммы");
+        button6.setOnAction(this::onClickButton6);
+        root.getChildren().add(button6);
+
+        Button button7 = new Button("Медианный фильтр");
+        button7.setOnAction(this::onClickButton7);
+        root.getChildren().add(button7);
+
+        Button button8 = new Button("Поиск прямых линий");
+        button8.setOnAction(this::onClickButton8);
+        root.getChildren().add(button8);
+
+        Button button9 = new Button("Эрозия и дилатация");
+        button9.setOnAction(this::onClickButton9);
+        root.getChildren().add(button9);
+
+        Scene scene = new Scene(root, 330.0, 410.0);
+        stage.setTitle("OpenCV " + Core.VERSION);
+        stage.setScene(scene);
+        stage.setOnCloseRequest(event -> {
+            Platform.exit();
+        });
+        stage.show();
+    }
 
     private void onClickButton(ActionEvent e) {
         //Получение чёрно-белого изображения
@@ -407,59 +419,4 @@ public class Panel {
         Imgproc.erode(img, img3, kernel);
         UtilsFrame.showImage(img3, "Илон Маск с эрозией");
     }
-
-    public Panel() {
-        VBox root = new VBox(15.0);
-        root.setAlignment(Pos.CENTER);
-
-        Button button = new Button("Получить чёрно-белое изображение");
-        button.setOnAction(this::onClickButton);
-        root.getChildren().add(button);
-
-        Button button1 = new Button("Cоздать черно-белый контур");
-        button1.setOnAction(this::onClickButton1);
-        root.getChildren().add(button1);
-
-        Button button2 = new Button("Увеличение и уменьшение яркости");
-        button2.setOnAction(this::onClickButton2);
-        root.getChildren().add(button2);
-
-        Button button3 = new Button("Увеличение и уменьшение насыщенности");
-        button3.setOnAction(this::onClickButton3);
-        root.getChildren().add(button3);
-
-        Button button4 = new Button("Изменение цветового баланса");
-        button4.setOnAction(this::onClickButton4);
-        root.getChildren().add(button4);
-
-        Button button5 = new Button("Вычисление гистограммы");
-        button5.setOnAction(this::onClickButton5);
-        root.getChildren().add(button5);
-
-        Button button6 = new Button("Изменение гистрограммы");
-        button6.setOnAction(this::onClickButton6);
-        root.getChildren().add(button6);
-
-        Button button7 = new Button("Медианный фильтр");
-        button7.setOnAction(this::onClickButton7);
-        root.getChildren().add(button7);
-
-        Button button8 = new Button("Поиск прямых линий");
-        button8.setOnAction(this::onClickButton8);
-        root.getChildren().add(button8);
-
-        Button button9 = new Button("Эрозия и дилатация");
-        button9.setOnAction(this::onClickButton9);
-        root.getChildren().add(button9);
-
-        Scene scene = new Scene(root, 330.0, 410.0);
-        Stage stage = new Stage();
-        stage.setTitle("OpenCV " + Core.VERSION);
-        stage.setScene(scene);
-        stage.setOnCloseRequest(event -> {
-            Platform.exit();
-        });
-        stage.show();
-    }
-
 }

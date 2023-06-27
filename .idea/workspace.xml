@@ -47,8 +47,8 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ru.shishkin.opencv.App" />
+    <configuration name="AppTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ru.shishkin.opencv.AppTest" />
       <module name="OpenCv" />
       <extension name="coverage">
         <pattern>
@@ -62,7 +62,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.App" />
+        <item itemvalue="Application.AppTest" />
       </list>
     </recent_temporary>
   </component>
