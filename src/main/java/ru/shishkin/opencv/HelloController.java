@@ -1,4 +1,4 @@
-package ru.shishkin.javaopencv;
+package ru.shishkin.opencv;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

@@ -7,6 +7,6 @@ module ru.shishkin.javaopencv {
     requires opencv;
     requires java.desktop;
 
-    opens ru.shishkin.javaopencv to javafx.fxml;
-    exports ru.shishkin.javaopencv;
+    opens ru.shishkin.opencv to javafx.fxml;
+    exports ru.shishkin.opencv;
 }

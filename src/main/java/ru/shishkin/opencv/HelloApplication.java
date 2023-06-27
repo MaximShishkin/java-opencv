@@ -1,9 +1,8 @@
-package ru.shishkin.javaopencv;
+package ru.shishkin.opencv;
 
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
