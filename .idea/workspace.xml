@@ -24,7 +24,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -34,13 +34,16 @@
     <key name="CreateClassDialog.RecentsKey">
       <recent name="ru.shishkin.opencv" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Files\MakShish\Desktop\opencv\java-opencv\src\main\resources" />
+    </key>
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="mvn clean javafx:run" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.Application">
+  <component name="RunManager" selected="Application.App">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ru.shishkin.opencv.App" />
       <module name="OpenCv" />
@@ -81,15 +84,13 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.Application" />
-      <item itemvalue="Application.ApplicationFrame" />
+      <item itemvalue="Application.App" />
+      <item itemvalue="Application.Frame" />
       <item itemvalue="Application.Main" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Application" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="Application.ApplicationFrame" />
       </list>
     </recent_temporary>
   </component>

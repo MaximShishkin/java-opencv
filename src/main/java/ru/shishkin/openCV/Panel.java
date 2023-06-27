@@ -18,7 +18,7 @@ public class Panel extends JPanel {
 
 
 
-        JButton button = new  JButton("Получить чёрно-белое изображение");
+        JButton button = new  JButton("Получить черно-белое изображение");
         button.addActionListener(this::onClickButton);
         add(button);
 
@@ -62,7 +62,7 @@ public class Panel extends JPanel {
 
     private void onClickButton(ActionEvent e) {
         //Получение чёрно-белого изображения
-        Mat img = Imgcodecs.imread("C:\\foto.jpg");
+        Mat img = Imgcodecs.imread("C:\\ElonMusk.jpg");
         if (img.empty()) {
             System.out.println("Не удалось загрузить изображение");
             return;
@@ -82,7 +82,7 @@ public class Panel extends JPanel {
 
     private void onClickButton1(ActionEvent e) {
         //Cоздание черно-белого контура
-        Mat img = Imgcodecs.imread("C:\\foto.jpg");
+        Mat img = Imgcodecs.imread("C:\\ElonMusk.jpg");
         if (img.empty()) {
             System.out.println("Не удалось загрузить изображение");
             return;
@@ -121,7 +121,7 @@ public class Panel extends JPanel {
 
     private void onClickButton2(ActionEvent e) {
         //Изменение яркости
-        Mat img = Imgcodecs.imread("C:\\foto.jpg");
+        Mat img = Imgcodecs.imread("C:\\ElonMusk.jpg");
         if (img.empty()) {
             System.out.println("Не удалось загрузить изображение");
             return;
@@ -150,7 +150,7 @@ public class Panel extends JPanel {
 
     private void onClickButton3(ActionEvent e) {
         //Изменение насыщенности
-        Mat img = Imgcodecs.imread("C:\\foto.jpg");
+        Mat img = Imgcodecs.imread("C:\\ElonMusk.jpg");
         if (img.empty()) {
             System.out.println("Не удалось загрузить изображение");
             return;
@@ -181,7 +181,7 @@ public class Panel extends JPanel {
 
     private void onClickButton4(ActionEvent e) {
         //Изменение цветового баланса
-        Mat img = Imgcodecs.imread("C:\\foto.jpg");
+        Mat img = Imgcodecs.imread("C:\\ElonMusk.jpg");
         if (img.empty()) {
             System.out.println("Не удалось загрузить изображение");
             return;
@@ -211,7 +211,7 @@ public class Panel extends JPanel {
 
     private void onClickButton5(ActionEvent e) {
         //Вычисление гистограммы
-        Mat img = Imgcodecs.imread("C:\\foto.jpg");
+        Mat img = Imgcodecs.imread("C:\\ElonMusk.jpg");
         if (img.empty()) {
             System.out.println("Не удалось загрузить изображение");
             return;
@@ -279,7 +279,7 @@ public class Panel extends JPanel {
 
     private void onClickButton6(ActionEvent e) {
         //Изменение гистрограммы
-        Mat img = Imgcodecs.imread("C:\\foto.jpg");
+        Mat img = Imgcodecs.imread("C:\\ElonMusk.jpg");
         if (img.empty()) {
             System.out.println("Не удалось загрузить изображение");
             return;
@@ -334,7 +334,7 @@ public class Panel extends JPanel {
 
     private void onClickButton7(ActionEvent e) {
         //Медианный фильтр
-        Mat img = Imgcodecs.imread("C:\\foto.jpg");
+        Mat img = Imgcodecs.imread("C:\\ElonMusk.jpg");
         if (img.empty()) {
             System.out.println("Не удалось загрузить изображение");
             return;
@@ -357,7 +357,7 @@ public class Panel extends JPanel {
 
     private void onClickButton8(ActionEvent e) {
         //Поиск прямых линий
-        Mat img = Imgcodecs.imread("C:\\foto.jpg");
+        Mat img = Imgcodecs.imread("C:\\ElonMusk.jpg");
         if (img.empty()) {
             System.out.println("Не удалось загрузить изображение");
             return;
@@ -386,7 +386,7 @@ public class Panel extends JPanel {
 
     private void onClickButton9(ActionEvent e) {
         //Дилатация и жрозия ищображения
-        Mat img = Imgcodecs.imread("C:\\foto.jpg");
+        Mat img = Imgcodecs.imread("C:\\ElonMusk.jpg");
         if (img.empty()) {
             System.out.println("Не удалось загрузить изображение");
             return;
