@@ -6,17 +6,22 @@ import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.opencv.core.*;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.CLAHE;
 import org.opencv.imgproc.Imgproc;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class ApplicationOpenCV extends Application {
+    private TextArea textArea;
+
     static {
         //System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         nu.pattern.OpenCV.loadLocally();
@@ -25,12 +30,17 @@ public class ApplicationOpenCV extends Application {
     public static void main(String[] args) {
         Application.launch();
     }
+
     @Override
     public void start(Stage stage) throws IOException {
         VBox root = new VBox(15.0);
         root.setAlignment(Pos.CENTER);
 
-        Button button = new Button("Получить чёрно-белое изображение");
+        textArea = new TextArea("D:\\Files\\MakShish\\Desktop\\ElonMusk.jpg");
+        textArea.setMaxSize(300, 10);
+        root.getChildren().add(textArea);
+
+        Button button = new Button("Получить черно-белое изображение");
         button.setOnAction(this::onClickButton);
         root.getChildren().add(button);
 
@@ -70,7 +80,7 @@ public class ApplicationOpenCV extends Application {
         button9.setOnAction(this::onClickButton9);
         root.getChildren().add(button9);
 
-        Scene scene = new Scene(root, 330.0, 410.0);
+        Scene scene = new Scene(root, 350.0, 500.0);
         stage.setTitle("OpenCV " + Core.VERSION);
         stage.setScene(scene);
         stage.setOnCloseRequest(event -> {
@@ -79,26 +89,24 @@ public class ApplicationOpenCV extends Application {
         stage.show();
     }
 
-
+    // Получить черно-белое изображение (6.1)
     private void onClickButton(ActionEvent e) {
-        //Получение чёрно-белого изображения
-        String p = "D:\\Files\\MakShish\\Desktop\\ElonMusk.jpg";
-        System.out.println(p);
-        String p1 = getClass().getClassLoader().getResource("ElonMusk.jpg").getFile();
-        System.out.println(p);
-        Mat img = Imgcodecs.imread(p);
+        Mat img = Imgcodecs.imread(textArea.getText());
+
         if (img.empty()) {
-            System.out.println("Не удалось загрузить изображение");
+            JOptionPane.showMessageDialog(null, "Неверно указан путь!", "Ошибка", 0);
             return;
         }
+
         Mat img2 = new Mat();
         Imgproc.cvtColor(img, img2, Imgproc.COLOR_BGR2GRAY);
+
         Mat img3 = new Mat();
-        double thresh = Imgproc.threshold(img2, img3, 100, 255,
-                Imgproc.THRESH_BINARY | Imgproc.THRESH_OTSU);
-        System.out.println(thresh);
+        Imgproc.threshold(img2, img3, 100, 255, Imgproc.THRESH_BINARY | Imgproc.THRESH_OTSU);
+
         UtilsJavaFX.showImage(img, "Илон Маск");
-        UtilsJavaFX.showImage(img3, "Илон Маск с THRESH_OTSU");
+        UtilsJavaFX.showImage(img3, "Черно-белый Илон Маск");
+
         img.release();
         img2.release();
         img3.release();

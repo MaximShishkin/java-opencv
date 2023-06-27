@@ -23,18 +23,16 @@ public class UtilsJavaFX {
     public static WritableImage MatToImageFX(Mat m) {
         // Листинг 3.4
         if (m == null || m.empty()) return null;
-        if (m.depth() == CvType.CV_8U) {}
-        else if (m.depth() == CvType.CV_16U) {
+        if (m.depth() == CvType.CV_8U) {
+        } else if (m.depth() == CvType.CV_16U) {
             Mat m_16 = new Mat();
             m.convertTo(m_16, CvType.CV_8U, 255.0 / 65535);
             m = m_16;
-        }
-        else if (m.depth() == CvType.CV_32F) {
+        } else if (m.depth() == CvType.CV_32F) {
             Mat m_32 = new Mat();
             m.convertTo(m_32, CvType.CV_8U, 255);
             m = m_32;
-        }
-        else
+        } else
             return null;
 
         if (m.channels() == 1) {
@@ -45,9 +43,8 @@ public class UtilsJavaFX {
             Mat m_bgra = new Mat();
             Imgproc.cvtColor(m, m_bgra, Imgproc.COLOR_BGR2BGRA);
             m = m_bgra;
-        }
-        else if (m.channels() == 4) { }
-        else
+        } else if (m.channels() == 4) {
+        } else
             return null;
 
         byte[] buf = new byte[m.channels() * m.cols() * m.rows()];
@@ -87,12 +84,10 @@ public class UtilsJavaFX {
             iv.setImage(im);
             if (im.getWidth() < 1000) {
                 sp.setPrefWidth(im.getWidth() + 5);
-            }
-            else sp.setPrefWidth(1000.0);
+            } else sp.setPrefWidth(1000.0);
             if (im.getHeight() < 700) {
                 sp.setPrefHeight(im.getHeight() + 5);
-            }
-            else sp.setPrefHeight(700.0);
+            } else sp.setPrefHeight(700.0);
         }
         sp.setContent(iv);
         sp.setPannable(true);
