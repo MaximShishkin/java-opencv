@@ -6,19 +6,19 @@ import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.CLAHE;
 import org.opencv.imgproc.Imgproc;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Panel extends JPanel {
-
-
     public Panel() {
 
+        //nu.pattern.OpenCV.loadShared();
 
 
-
-        JButton button = new  JButton("Получить черно-белое изображение");
+        JButton button = new JButton("Получить черно-белое изображение");
         button.addActionListener(this::onClickButton);
         add(button);
 
@@ -60,9 +60,13 @@ public class Panel extends JPanel {
 
     }
 
-    private void onClickButton(ActionEvent e) {
+    private void onClickButton(ActionEvent e)  {
         //Получение чёрно-белого изображения
-        Mat img = Imgcodecs.imread("C:\\ElonMusk.jpg");
+        String p = "D:\\Files\\MakShish\\Desktop\\ElonMusk.jpg";
+        System.out.println(p);
+        String p1 = getClass().getClassLoader().getResource("ElonMusk.jpg").getFile();
+        System.out.println(p);
+        Mat img = Imgcodecs.imread(p);
         if (img.empty()) {
             System.out.println("Не удалось загрузить изображение");
             return;
@@ -82,7 +86,7 @@ public class Panel extends JPanel {
 
     private void onClickButton1(ActionEvent e) {
         //Cоздание черно-белого контура
-        Mat img = Imgcodecs.imread("C:\\ElonMusk.jpg");
+        Mat img = Imgcodecs.imread(getClass().getClassLoader().getResource("ElonMusk.jpg").getPath());
         if (img.empty()) {
             System.out.println("Не удалось загрузить изображение");
             return;
@@ -121,7 +125,7 @@ public class Panel extends JPanel {
 
     private void onClickButton2(ActionEvent e) {
         //Изменение яркости
-        Mat img = Imgcodecs.imread("C:\\ElonMusk.jpg");
+        Mat img = Imgcodecs.imread(getClass().getClassLoader().getResource("ElonMusk.jpg").getPath());
         if (img.empty()) {
             System.out.println("Не удалось загрузить изображение");
             return;
@@ -150,7 +154,7 @@ public class Panel extends JPanel {
 
     private void onClickButton3(ActionEvent e) {
         //Изменение насыщенности
-        Mat img = Imgcodecs.imread("C:\\ElonMusk.jpg");
+        Mat img = Imgcodecs.imread(getClass().getClassLoader().getResource("ElonMusk.jpg").getPath());
         if (img.empty()) {
             System.out.println("Не удалось загрузить изображение");
             return;
@@ -181,7 +185,7 @@ public class Panel extends JPanel {
 
     private void onClickButton4(ActionEvent e) {
         //Изменение цветового баланса
-        Mat img = Imgcodecs.imread("C:\\ElonMusk.jpg");
+        Mat img = Imgcodecs.imread(getClass().getClassLoader().getResource("ElonMusk.jpg").getPath());
         if (img.empty()) {
             System.out.println("Не удалось загрузить изображение");
             return;
@@ -211,7 +215,7 @@ public class Panel extends JPanel {
 
     private void onClickButton5(ActionEvent e) {
         //Вычисление гистограммы
-        Mat img = Imgcodecs.imread("C:\\ElonMusk.jpg");
+        Mat img = Imgcodecs.imread(getClass().getClassLoader().getResource("ElonMusk.jpg").getPath());
         if (img.empty()) {
             System.out.println("Не удалось загрузить изображение");
             return;
@@ -279,7 +283,7 @@ public class Panel extends JPanel {
 
     private void onClickButton6(ActionEvent e) {
         //Изменение гистрограммы
-        Mat img = Imgcodecs.imread("C:\\ElonMusk.jpg");
+        Mat img = Imgcodecs.imread(getClass().getClassLoader().getResource("ElonMusk.jpg").getPath());
         if (img.empty()) {
             System.out.println("Не удалось загрузить изображение");
             return;
@@ -334,7 +338,7 @@ public class Panel extends JPanel {
 
     private void onClickButton7(ActionEvent e) {
         //Медианный фильтр
-        Mat img = Imgcodecs.imread("C:\\ElonMusk.jpg");
+        Mat img = Imgcodecs.imread(getClass().getClassLoader().getResource("ElonMusk.jpg").getPath());
         if (img.empty()) {
             System.out.println("Не удалось загрузить изображение");
             return;
@@ -357,7 +361,7 @@ public class Panel extends JPanel {
 
     private void onClickButton8(ActionEvent e) {
         //Поиск прямых линий
-        Mat img = Imgcodecs.imread("C:\\ElonMusk.jpg");
+        Mat img = Imgcodecs.imread(getClass().getClassLoader().getResource("ElonMusk.jpg").getPath());
         if (img.empty()) {
             System.out.println("Не удалось загрузить изображение");
             return;
@@ -386,7 +390,7 @@ public class Panel extends JPanel {
 
     private void onClickButton9(ActionEvent e) {
         //Дилатация и жрозия ищображения
-        Mat img = Imgcodecs.imread("C:\\ElonMusk.jpg");
+        Mat img = Imgcodecs.imread(getClass().getClassLoader().getResource("ElonMusk.jpg").getPath());
         if (img.empty()) {
             System.out.println("Не удалось загрузить изображение");
             return;

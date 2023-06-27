@@ -24,9 +24,9 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/opencv-347.jar" />
     <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.repository.indices" />
   </component>
@@ -41,9 +41,12 @@
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="mvn clean javafx:run" />
+      <command value="mvn exec:java -Dexec.mainClass=&quot;com.rnd.CamCapture&quot;" />
+      <command value="mvn exec:java -Dexec.mainClass=&quot;ru.shishkin.opencv.App&quot;" />
+      <command value="mvn exec:java -Dexec.mainClass=ru.shishkin.opencv.App" />
     </option>
   </component>
-  <component name="RunManager" selected="Application.App">
+  <component name="RunManager">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ru.shishkin.opencv.App" />
       <module name="OpenCv" />
@@ -57,40 +60,9 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Frame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ru.shishkin.opencv.Frame" />
-      <module name="OpenCv" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="ru.shishkin.opencv.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ru.shishkin.opencv.Main" />
-      <module name="OpenCv" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="ru.shishkin.opencv.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <list>
-      <item itemvalue="Application.App" />
-      <item itemvalue="Application.Frame" />
-      <item itemvalue="Application.Main" />
-    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.App" />
       </list>
     </recent_temporary>
   </component>
