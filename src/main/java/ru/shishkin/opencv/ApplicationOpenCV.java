@@ -44,7 +44,7 @@ public class ApplicationOpenCV extends Application {
         button.setOnAction(this::onClickButton);
         root.getChildren().add(button);
 
-        Button button1 = new Button("Cоздать черно-белый контур");
+        Button button1 = new Button("Получить черно-белый контур");
         button1.setOnAction(this::onClickButton1);
         root.getChildren().add(button1);
 
@@ -112,26 +112,28 @@ public class ApplicationOpenCV extends Application {
         img3.release();
     }
 
+    // Получить черно-белый контур
     private void onClickButton1(ActionEvent e) {
-        //Cоздание черно-белого контура
-        Mat img = Imgcodecs.imread(getClass().getClassLoader().getResource("ElonMusk.jpg").getPath());
+        Mat img = Imgcodecs.imread(textArea.getText());
+
         if (img.empty()) {
-            System.out.println("Не удалось загрузить изображение");
+            JOptionPane.showMessageDialog(null, "Неверно указан путь!", "Ошибка", 0);
             return;
         }
+
         Mat img2 = new Mat();
         Imgproc.cvtColor(img, img2, Imgproc.COLOR_BGR2GRAY);
+
         Mat img3 = new Mat();
-        Imgproc.adaptiveThreshold(img2, img3, 255,
-                Imgproc.ADAPTIVE_THRESH_MEAN_C,
-                Imgproc.THRESH_BINARY, 3, 5);
+        Imgproc.adaptiveThreshold(img2, img3, 255, Imgproc.ADAPTIVE_THRESH_MEAN_C, Imgproc.THRESH_BINARY, 3, 5);
+
         Mat img4 = new Mat();
-        Imgproc.adaptiveThreshold(img2, img4, 255,
-                Imgproc.ADAPTIVE_THRESH_GAUSSIAN_C,
-                Imgproc.THRESH_BINARY_INV, 3, 5);
+        Imgproc.adaptiveThreshold(img2, img4, 255, Imgproc.ADAPTIVE_THRESH_GAUSSIAN_C, Imgproc.THRESH_BINARY_INV, 3, 5);
+
         UtilsJavaFX.showImage(img, "Илон Маск");
         UtilsJavaFX.showImage(img3, "Илонс Маск с ADAPTIVE_THRESH_MEAN_C");
         UtilsJavaFX.showImage(img4, "Илон Маск с ADAPTIVE_THRESH_GAUSSIAN_C + THRESH_BINARY_INV");
+
         // Инверсия с помощью таблицы соответствия
         Mat lut = new Mat(1, 256, CvType.CV_8UC1);
         byte[] arr = new byte[256];
@@ -139,10 +141,12 @@ public class ApplicationOpenCV extends Application {
             arr[i] = (byte) (255 - i);
         }
         lut.put(0, 0, arr);
+
         // Преобразование в соответствии с таблицей
         Mat imgInv = new Mat();
         Core.LUT(img3, lut, imgInv);
-        UtilsJavaFX.showImage(imgInv, "Илон Маск с ADAPTIVE_THRESH_MEAN_C + Inv");
+        UtilsJavaFX.showImage(imgInv, "Илон Маск с ADAPTIVE_THRESH_MEAN_C + инверсия");
+
         img.release();
         img2.release();
         img3.release();

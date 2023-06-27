@@ -36,7 +36,6 @@ public class UtilsOpenCV {
     }
 
     public static BufferedImage MatToBufferedImage(Mat m) {
-        // Листинг 3.1
         if (m == null || m.empty()) {
             return null;
         }
