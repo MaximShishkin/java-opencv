@@ -1,4 +1,4 @@
-module ru.shishkin.javaopencv {
+module ru.shishkin.opencv {
     requires javafx.controls;
     requires javafx.fxml;
 

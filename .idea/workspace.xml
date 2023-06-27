@@ -28,8 +28,8 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ru.shishkin.opencv.HelloApplication" />
+    <configuration name="ApplicationOpenCV" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ru.shishkin.opencv.ApplicationOpenCV" />
       <module name="opencv" />
       <extension name="coverage">
         <pattern>
@@ -43,7 +43,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.HelloApplication" />
+        <item itemvalue="Application.ApplicationOpenCV" />
       </list>
     </recent_temporary>
   </component>

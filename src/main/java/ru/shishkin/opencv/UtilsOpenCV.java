@@ -193,5 +193,4 @@ public class UtilsOpenCV {
         window.setLocationRelativeTo(null);
         window.setVisible(true);
     }
-
 }

@@ -12,7 +12,7 @@ import org.opencv.imgproc.Imgproc;
 
 import java.awt.image.BufferedImage;
 
-public class UtilsFrame {
+public class UtilsJavaFX {
     public static WritableImage MatToWritableImage(Mat m) {
         // Листинг 3.3
         BufferedImage bim = UtilsOpenCV.MatToBufferedImage(m);

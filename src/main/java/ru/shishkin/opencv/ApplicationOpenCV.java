@@ -16,7 +16,7 @@ import org.opencv.imgproc.Imgproc;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class HelloApplication extends Application {
+public class ApplicationOpenCV extends Application {
     static {
         //System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         nu.pattern.OpenCV.loadLocally();
@@ -97,8 +97,8 @@ public class HelloApplication extends Application {
         double thresh = Imgproc.threshold(img2, img3, 100, 255,
                 Imgproc.THRESH_BINARY | Imgproc.THRESH_OTSU);
         System.out.println(thresh);
-        UtilsFrame.showImage(img, "Илон Маск");
-        UtilsFrame.showImage(img3, "Илон Маск с THRESH_OTSU");
+        UtilsJavaFX.showImage(img, "Илон Маск");
+        UtilsJavaFX.showImage(img3, "Илон Маск с THRESH_OTSU");
         img.release();
         img2.release();
         img3.release();
@@ -121,9 +121,9 @@ public class HelloApplication extends Application {
         Imgproc.adaptiveThreshold(img2, img4, 255,
                 Imgproc.ADAPTIVE_THRESH_GAUSSIAN_C,
                 Imgproc.THRESH_BINARY_INV, 3, 5);
-        UtilsFrame.showImage(img, "Илон Маск");
-        UtilsFrame.showImage(img3, "Илонс Маск с ADAPTIVE_THRESH_MEAN_C");
-        UtilsFrame.showImage(img4, "Илон Маск с ADAPTIVE_THRESH_GAUSSIAN_C + THRESH_BINARY_INV");
+        UtilsJavaFX.showImage(img, "Илон Маск");
+        UtilsJavaFX.showImage(img3, "Илонс Маск с ADAPTIVE_THRESH_MEAN_C");
+        UtilsJavaFX.showImage(img4, "Илон Маск с ADAPTIVE_THRESH_GAUSSIAN_C + THRESH_BINARY_INV");
         // Инверсия с помощью таблицы соответствия
         Mat lut = new Mat(1, 256, CvType.CV_8UC1);
         byte[] arr = new byte[256];
@@ -134,7 +134,7 @@ public class HelloApplication extends Application {
         // Преобразование в соответствии с таблицей
         Mat imgInv = new Mat();
         Core.LUT(img3, lut, imgInv);
-        UtilsFrame.showImage(imgInv, "Илон Маск с ADAPTIVE_THRESH_MEAN_C + Inv");
+        UtilsJavaFX.showImage(imgInv, "Илон Маск с ADAPTIVE_THRESH_MEAN_C + Inv");
         img.release();
         img2.release();
         img3.release();
@@ -162,9 +162,9 @@ public class HelloApplication extends Application {
         Core.add(imgHSV, new Scalar(0, 0, 40), imgHSV);
         Mat imgBGR = new Mat();
         Imgproc.cvtColor(imgHSV, imgBGR, Imgproc.COLOR_HSV2BGR);
-        UtilsFrame.showImage(img, "Илон Маск");
-        UtilsFrame.showImage(imgBGR, "Илон Маск с Яркостью +40");
-        UtilsFrame.showImage(imgBGR1, "Илон Маск с Яркостью -40");
+        UtilsJavaFX.showImage(img, "Илон Маск");
+        UtilsJavaFX.showImage(imgBGR, "Илон Маск с Яркостью +40");
+        UtilsJavaFX.showImage(imgBGR1, "Илон Маск с Яркостью -40");
         img.release();
         imgHSV.release();
         imgHSV1.release();
@@ -193,9 +193,9 @@ public class HelloApplication extends Application {
         Mat imgBGR1 = new Mat();
         Imgproc.cvtColor(imgHSV1, imgBGR1, Imgproc.COLOR_HSV2BGR);
 
-        UtilsFrame.showImage(img, "Илон Маск");
-        UtilsFrame.showImage(imgBGR, "Илон Маск с насыщенностью +40");
-        UtilsFrame.showImage(imgBGR1, "Илон Маск с насыщенностью -40");
+        UtilsJavaFX.showImage(img, "Илон Маск");
+        UtilsJavaFX.showImage(imgBGR, "Илон Маск с насыщенностью +40");
+        UtilsJavaFX.showImage(imgBGR1, "Илон Маск с насыщенностью -40");
         img.release();
         imgHSV.release();
         imgHSV1.release();
@@ -223,9 +223,9 @@ public class HelloApplication extends Application {
         Core.add(imgLab1, new Scalar(0, 0, 20), imgLab1);
         Mat imgBGR1 = new Mat();
         Imgproc.cvtColor(imgLab1, imgBGR1, Imgproc.COLOR_Lab2BGR);
-        UtilsFrame.showImage(img, "Илон Маск");
-        UtilsFrame.showImage(imgBGR, "Синий Илон Маск");
-        UtilsFrame.showImage(imgBGR1, "Жёлтый Илон Маск");
+        UtilsJavaFX.showImage(img, "Илон Маск");
+        UtilsJavaFX.showImage(imgBGR, "Синий Илон Маск");
+        UtilsJavaFX.showImage(imgBGR1, "Жёлтый Илон Маск");
         img.release();
         imgLab.release();
         imgLab1.release();
@@ -240,7 +240,7 @@ public class HelloApplication extends Application {
             System.out.println("Не удалось загрузить изображение");
             return;
         }
-        UtilsFrame.showImage(img, "Оригинал");
+        UtilsJavaFX.showImage(img, "Оригинал");
         Mat imgGray = new Mat();
         Imgproc.cvtColor(img, imgGray, Imgproc.COLOR_BGR2GRAY);
         // Вычисляем гистограммы по каналам
@@ -285,10 +285,10 @@ public class HelloApplication extends Application {
                 Imgproc.line(imgHistGray, new org.opencv.core.Point(i, h - 1), new org.opencv.core.Point(i, h - 1 - v), UtilsOpenCV.COLOR_GRAY);
             }
         }
-        UtilsFrame.showImage(imgHistRed, "Red");
-        UtilsFrame.showImage(imgHistGreen, "Green");
-        UtilsFrame.showImage(imgHistBlue, "Blue");
-        UtilsFrame.showImage(imgHistGray, "Gray");
+        UtilsJavaFX.showImage(imgHistRed, "Red");
+        UtilsJavaFX.showImage(imgHistGreen, "Green");
+        UtilsJavaFX.showImage(imgHistBlue, "Blue");
+        UtilsJavaFX.showImage(imgHistGray, "Gray");
         img.release();
         imgGray.release();
         imgHistRed.release();
@@ -343,10 +343,10 @@ public class HelloApplication extends Application {
                         new org.opencv.core.Point(i, h - 1 - v), UtilsOpenCV.COLOR_BLACK);
             }
         }
-        UtilsFrame.showImage(img2, "Оригинал");
-        UtilsFrame.showImage(imgHist, "Гистограмма до");
-        UtilsFrame.showImage(img3, "CLAHE");
-        UtilsFrame.showImage(imgHist2, "Гистограмма после");
+        UtilsJavaFX.showImage(img2, "Оригинал");
+        UtilsJavaFX.showImage(imgHist, "Гистограмма до");
+        UtilsJavaFX.showImage(img3, "CLAHE");
+        UtilsJavaFX.showImage(imgHist2, "Гистограмма после");
         img.release();
         img2.release();
         img3.release();
@@ -364,15 +364,15 @@ public class HelloApplication extends Application {
             return;
         }
         Mat img2 = new Mat();
-        UtilsFrame.showImage(img, "Илон Маск");
+        UtilsJavaFX.showImage(img, "Илон Маск");
         Imgproc.medianBlur(img, img2, 3);
-        UtilsFrame.showImage(img2, "Илон Маск с параметром фильтра 3");
+        UtilsJavaFX.showImage(img2, "Илон Маск с параметром фильтра 3");
         Mat img3 = new Mat();
         Imgproc.medianBlur(img, img3, 5);
-        UtilsFrame.showImage(img3, "Илон Маск с параметром фильтра 5");
+        UtilsJavaFX.showImage(img3, "Илон Маск с параметром фильтра 5");
         Mat img4 = new Mat();
         Imgproc.medianBlur(img, img4, 45);
-        UtilsFrame.showImage(img4, "Илон Маск с параметром фильтра 45");
+        UtilsJavaFX.showImage(img4, "Илон Маск с параметром фильтра 45");
         img.release();
         img2.release();
         img3.release();
@@ -390,7 +390,7 @@ public class HelloApplication extends Application {
         Imgproc.cvtColor(img, imgGray, Imgproc.COLOR_BGR2GRAY);
         Mat edges = new Mat();
         Imgproc.Canny(imgGray, edges, 80, 200);
-        UtilsFrame.showImage(edges, "Илон Маск с применением Canny");
+        UtilsJavaFX.showImage(edges, "Илон Маск с применением Canny");
         Mat lines = new Mat();
         Imgproc.HoughLinesP(edges, lines, 1, Math.toRadians(2), 20, 30, 0);
         Mat result = new Mat(img.size(), CvType.CV_8UC3, UtilsOpenCV.COLOR_WHITE);
@@ -401,7 +401,7 @@ public class HelloApplication extends Application {
                         new Point(line[2], line[3]), UtilsOpenCV.COLOR_BLACK);
             }
         }
-        UtilsFrame.showImage(result, "Результат поиска прямых линий");
+        UtilsJavaFX.showImage(result, "Результат поиска прямых линий");
         img.release();
         imgGray.release();
         edges.release();
@@ -415,14 +415,14 @@ public class HelloApplication extends Application {
             System.out.println("Не удалось загрузить изображение");
             return;
         }
-        UtilsFrame.showImage(img, "Илон Маск");
+        UtilsJavaFX.showImage(img, "Илон Маск");
         Mat kernel = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new Size(3, 3));
         Mat img2 = new Mat();
         Imgproc.dilate(img, img2, kernel);
-        UtilsFrame.showImage(img2, "Илон Маск с дилатацией");
+        UtilsJavaFX.showImage(img2, "Илон Маск с дилатацией");
         Mat img3 = new Mat();
         Imgproc.erode(img, img3, kernel);
-        UtilsFrame.showImage(img3, "Илон Маск с эрозией");
+        UtilsJavaFX.showImage(img3, "Илон Маск с эрозией");
     }
 
 }
