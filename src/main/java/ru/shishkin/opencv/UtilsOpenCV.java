@@ -104,7 +104,6 @@ public class UtilsOpenCV {
     }
 
     public static boolean saveMat(Mat m, String path) {
-        // Листинг 3.6
         if (m == null || m.empty()) return false;
         if (path == null || path.length() < 5 || !path.endsWith(".mat")) return false;
         if (m.depth() == CvType.CV_8U) {

@@ -189,13 +189,15 @@ public class ApplicationOpenCV extends Application {
         imgBGR1.release();
     }
 
+    // Увеличение и уменьшение насыщенности (6.2)
     private void onClickButton3(ActionEvent e) {
-        //Изменение насыщенности
-        Mat img = Imgcodecs.imread(getClass().getClassLoader().getResource("ElonMusk.jpg").getPath());
+        Mat img = Imgcodecs.imread(textArea.getText());
+
         if (img.empty()) {
-            System.out.println("Не удалось загрузить изображение");
+            JOptionPane.showMessageDialog(null, "Неверно указан путь!", "Ошибка", 0);
             return;
         }
+
         // Увеличение насыщенности
         Mat imgHSV = new Mat();
         Imgproc.cvtColor(img, imgHSV, Imgproc.COLOR_BGR2HSV);
@@ -213,6 +215,7 @@ public class ApplicationOpenCV extends Application {
         UtilsJavaFX.showImage(img, "Илон Маск");
         UtilsJavaFX.showImage(imgBGR, "Илон Маск с насыщенностью +40");
         UtilsJavaFX.showImage(imgBGR1, "Илон Маск с насыщенностью -40");
+
         img.release();
         imgHSV.release();
         imgHSV1.release();

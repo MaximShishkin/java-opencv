@@ -19,7 +19,6 @@ public class UtilsJavaFX {
     }
 
     public static WritableImage MatToImageFX(Mat m) {
-        // Листинг 3.4
         if (m == null || m.empty()) return null;
         if (m.depth() == CvType.CV_8U) {
         } else if (m.depth() == CvType.CV_16U) {
