@@ -74,7 +74,6 @@ public class UtilsOpenCV {
     }
 
     public static Mat BufferedImageToMat(BufferedImage img) {
-        // Листинг 3.2
         if (img == null) return new Mat();
         int type = 0;
         if (img.getType() == BufferedImage.TYPE_BYTE_GRAY) {

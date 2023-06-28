@@ -112,7 +112,7 @@ public class ApplicationOpenCV extends Application {
         img3.release();
     }
 
-    // Получить черно-белый контур
+    // Получить черно-белый контур (6.2)
     private void onClickButton1(ActionEvent e) {
         Mat img = Imgcodecs.imread(textArea.getText());
 
@@ -155,28 +155,33 @@ public class ApplicationOpenCV extends Application {
         lut.release();
     }
 
+    // Увеличение и уменьшение яркости (6.2)
     private void onClickButton2(ActionEvent e) {
-        //Изменение яркости
-        Mat img = Imgcodecs.imread(getClass().getClassLoader().getResource("ElonMusk.jpg").getPath());
+        Mat img = Imgcodecs.imread(textArea.getText());
+
         if (img.empty()) {
-            System.out.println("Не удалось загрузить изображение");
+            JOptionPane.showMessageDialog(null, "Неверно указан путь!", "Ошибка", 0);
             return;
         }
+
         // Уменьшение яркости
         Mat imgHSV1 = new Mat();
         Imgproc.cvtColor(img, imgHSV1, Imgproc.COLOR_BGR2HSV);
         Core.add(imgHSV1, new Scalar(0, 0, -40), imgHSV1);
         Mat imgBGR1 = new Mat();
         Imgproc.cvtColor(imgHSV1, imgBGR1, Imgproc.COLOR_HSV2BGR);
+
         // Увеличение яркости
         Mat imgHSV = new Mat();
         Imgproc.cvtColor(img, imgHSV, Imgproc.COLOR_BGR2HSV);
         Core.add(imgHSV, new Scalar(0, 0, 40), imgHSV);
         Mat imgBGR = new Mat();
         Imgproc.cvtColor(imgHSV, imgBGR, Imgproc.COLOR_HSV2BGR);
+
         UtilsJavaFX.showImage(img, "Илон Маск");
-        UtilsJavaFX.showImage(imgBGR, "Илон Маск с Яркостью +40");
-        UtilsJavaFX.showImage(imgBGR1, "Илон Маск с Яркостью -40");
+        UtilsJavaFX.showImage(imgBGR, "Илон Маск с яркостью +40");
+        UtilsJavaFX.showImage(imgBGR1, "Илон Маск с яркостью -40");
+
         img.release();
         imgHSV.release();
         imgHSV1.release();
