@@ -137,7 +137,6 @@ public class UtilsOpenCV {
     }
 
     public static Mat loadMat(String path) {
-        // Листинг 3.7
         if (path == null || path.length() < 5 || !path.endsWith(".mat"))
             return new Mat();
         File f = new File(path);

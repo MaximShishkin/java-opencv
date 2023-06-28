@@ -57,7 +57,6 @@ public class UtilsJavaFX {
     }
 
     public static Mat ImageFXToMat(Image img) {
-        // Листинг 3.5
         if (img == null) return new Mat();
         PixelReader pr = img.getPixelReader();
         int w = (int) img.getWidth();

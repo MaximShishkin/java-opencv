@@ -40,22 +40,27 @@ public class ApplicationOpenCV extends Application {
         textArea.setMaxSize(300, 10);
         root.getChildren().add(textArea);
 
+        // (6.1)
         Button button = new Button("Получить черно-белое изображение");
         button.setOnAction(this::onClickButton);
         root.getChildren().add(button);
 
+        // (6.1)
         Button button1 = new Button("Получить черно-белый контур");
         button1.setOnAction(this::onClickButton1);
         root.getChildren().add(button1);
 
+        // (6.2)
         Button button2 = new Button("Увеличение и уменьшение яркости");
         button2.setOnAction(this::onClickButton2);
         root.getChildren().add(button2);
 
+        // (6.2)
         Button button3 = new Button("Увеличение и уменьшение насыщенности");
         button3.setOnAction(this::onClickButton3);
         root.getChildren().add(button3);
 
+        // (6.3)
         Button button4 = new Button("Изменение цветового баланса");
         button4.setOnAction(this::onClickButton4);
         root.getChildren().add(button4);
@@ -223,13 +228,15 @@ public class ApplicationOpenCV extends Application {
         imgBGR1.release();
     }
 
+    // Изменение цветового баланса (6.3)
     private void onClickButton4(ActionEvent e) {
-        //Изменение цветового баланса
-        Mat img = Imgcodecs.imread(getClass().getClassLoader().getResource("ElonMusk.jpg").getPath());
+        Mat img = Imgcodecs.imread(textArea.getText());
+
         if (img.empty()) {
-            System.out.println("Не удалось загрузить изображение");
+            JOptionPane.showMessageDialog(null, "Неверно указан путь!", "Ошибка", 0);
             return;
         }
+
         // Положение цвета от зеленого до красного
         Mat imgLab = new Mat();
         Imgproc.cvtColor(img, imgLab, Imgproc.COLOR_BGR2Lab);
@@ -243,9 +250,11 @@ public class ApplicationOpenCV extends Application {
         Core.add(imgLab1, new Scalar(0, 0, 20), imgLab1);
         Mat imgBGR1 = new Mat();
         Imgproc.cvtColor(imgLab1, imgBGR1, Imgproc.COLOR_Lab2BGR);
+
         UtilsJavaFX.showImage(img, "Илон Маск");
         UtilsJavaFX.showImage(imgBGR, "Синий Илон Маск");
-        UtilsJavaFX.showImage(imgBGR1, "Жёлтый Илон Маск");
+        UtilsJavaFX.showImage(imgBGR1, "Желтый Илон Маск");
+
         img.release();
         imgLab.release();
         imgLab1.release();
