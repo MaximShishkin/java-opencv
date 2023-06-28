@@ -14,8 +14,12 @@ import java.awt.image.BufferedImage;
 public class UtilsJavaFX {
     public static WritableImage MatToWritableImage(Mat m) {
         BufferedImage bim = UtilsOpenCV.MatToBufferedImage(m);
-        if (bim == null) return null;
-        else return null;
+
+        if (bim == null) {
+            return null;
+        } else {
+            return null;
+        }
     }
 
     public static WritableImage MatToImageFX(Mat m) {

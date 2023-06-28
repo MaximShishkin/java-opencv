@@ -40,34 +40,40 @@ public class ApplicationOpenCV extends Application {
         textArea.setMaxSize(300, 10);
         root.getChildren().add(textArea);
 
-        // (6.1)
+        // 6.1
         Button button = new Button("Получить черно-белое изображение");
         button.setOnAction(this::onClickButton);
         root.getChildren().add(button);
 
-        // (6.1)
+        // 6.1
         Button button1 = new Button("Получить черно-белый контур");
         button1.setOnAction(this::onClickButton1);
         root.getChildren().add(button1);
 
-        // (6.2)
+        // 6.2
         Button button2 = new Button("Увеличение и уменьшение яркости");
         button2.setOnAction(this::onClickButton2);
         root.getChildren().add(button2);
 
-        // (6.2)
+        // 6.2
         Button button3 = new Button("Увеличение и уменьшение насыщенности");
         button3.setOnAction(this::onClickButton3);
         root.getChildren().add(button3);
 
-        // (6.3)
+        // 6.3
         Button button4 = new Button("Изменение цветового баланса");
         button4.setOnAction(this::onClickButton4);
         root.getChildren().add(button4);
 
-        Button button5 = new Button("Вычисление гистограммы");
+        // 6.4
+        Button button5 = new Button("Изменение контраста");
         button5.setOnAction(this::onClickButton5);
         root.getChildren().add(button5);
+
+
+        Button button55 = new Button("Вычисление гистограммы");
+        button55.setOnAction(this::onClickButton55);
+        root.getChildren().add(button55);
 
         Button button6 = new Button("Изменение гистрограммы");
         button6.setOnAction(this::onClickButton6);
@@ -262,7 +268,47 @@ public class ApplicationOpenCV extends Application {
         imgBGR1.release();
     }
 
+    // Изменение контраста (6.4)
     private void onClickButton5(ActionEvent e) {
+        Mat img = Imgcodecs.imread(textArea.getText());
+
+        if (img.empty()) {
+            JOptionPane.showMessageDialog(null, "Неверно указан путь!", "Ошибка", 0);
+            return;
+        }
+
+        // Вычисление средней яркости изображения
+        Scalar meanBGR = Core.mean(img);
+        double mean = meanBGR.val[0] * 0.114 + meanBGR.val[1] * 0.587 + meanBGR.val[2] * 0.299;
+        // Коэффициент контраста
+        double contrast = 1.5;
+
+        // Построение таблицы соответствия
+        Mat lut = new Mat(1, 256, CvType.CV_8UC1);
+        byte[] arr = new byte[256];
+        int color = 0;
+        for (int i = 0; i < 256; i++) {
+            color = (int) (contrast * (i - mean) + mean);
+            //color = (int) (contrast * (i - 128) + 128);
+            //color = (int) ((contrast * (i / 255.0 - 0.5) + 0.5) * 255);
+            color = color > 255 ? 255 : (color < 0 ? 0 : color);
+            arr[i] = (byte) (color);
+        }
+        lut.put(0, 0, arr);
+
+        // Применение таблицы соответствия к изображению
+        Mat img2 = new Mat();
+        Core.LUT(img, lut, img2);
+
+        UtilsJavaFX.showImage(img, "Илон Маск");
+        UtilsJavaFX.showImage(img2, "Илон Маск с контрастом: " + contrast);
+
+        img.release();
+        img2.release();
+        lut.release();
+    }
+
+    private void onClickButton55(ActionEvent e) {
         //Вычисление гистограммы
         Mat img = Imgcodecs.imread(getClass().getClassLoader().getResource("ElonMusk.jpg").getPath());
         if (img.empty()) {
