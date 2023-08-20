@@ -308,6 +308,24 @@ public class ApplicationOpenCV extends Application {
         lut.release();
     }
 
+    // Создание негатива изображения (6.5)
+    private void onClickButton6(ActionEvent e) {
+        Mat img = Imgcodecs.imread(textArea.getText());
+
+        if (img.empty()) {
+            JOptionPane.showMessageDialog(null, "Неверно указан путь!", "Ошибка", 0);
+            return;
+        }
+
+        Mat m = new Mat(img.rows(), img.cols(), img.type(), UtilsOpenCV.COLOR_WHITE);
+        Mat negative = new Mat();
+        Core.subtract(m, img, negative);
+        UtilsOpenCV.showImage(negative, "Негатив");
+        img.release();
+        negative.release();
+        m.release();
+    }
+
     private void onClickButton55(ActionEvent e) {
         //Вычисление гистограммы
         Mat img = Imgcodecs.imread(getClass().getClassLoader().getResource("ElonMusk.jpg").getPath());
@@ -376,7 +394,7 @@ public class ApplicationOpenCV extends Application {
         histBlue.release();
     }
 
-    private void onClickButton6(ActionEvent e) {
+    private void onClickButton66(ActionEvent e) {
         //Изменение гистрограммы
         Mat img = Imgcodecs.imread(getClass().getClassLoader().getResource("ElonMusk.jpg").getPath());
         if (img.empty()) {
