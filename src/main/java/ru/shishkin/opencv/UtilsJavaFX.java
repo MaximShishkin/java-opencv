@@ -28,6 +28,7 @@ public class UtilsJavaFX {
         }
 
         if (m.depth() == CvType.CV_8U) {
+
         } else if (m.depth() == CvType.CV_16U) {
             Mat m_16 = new Mat();
             m.convertTo(m_16, CvType.CV_8U, 255.0 / 65535);
@@ -115,5 +116,4 @@ public class UtilsJavaFX {
         window.setTitle(title);
         window.show();
     }
-
 }

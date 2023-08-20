@@ -233,14 +233,20 @@ public class UtilsOpenCV {
 
     public static void showImage(Mat img, String title) {
         BufferedImage im = MatToBufferedImage(img);
-        if (im == null) return;
+
+        if (im == null) {
+            return;
+        }
+
         int w = 1000, h = 600;
         JFrame window = new JFrame(title);
         window.setSize(w, h);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         ImageIcon imageIcon = new ImageIcon(im);
         JLabel label = new JLabel(imageIcon);
         JScrollPane pane = new JScrollPane(label);
+
         window.setContentPane(pane);
 
         if (im.getWidth() < w && im.getHeight() < h) {

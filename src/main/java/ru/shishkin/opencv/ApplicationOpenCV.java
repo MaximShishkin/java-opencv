@@ -84,12 +84,13 @@ public class ApplicationOpenCV extends Application {
         button8.setOnAction(this::onClickButton8);
         root.getChildren().add(button8);
 
-        // Вычисление гистограммы (6.8)
-        // Вычисление гистограммы (6.9)
-        // Вычисление гистограммы (6.10)
-        Button button9 = new Button("Эрозия и дилатация");
+        // Автоматическое выравнивание гистограммы изображения в градациях серого (6.8)
+        Button button9 = new Button("Выравнивание гистограммы");
         button9.setOnAction(this::onClickButton9);
         root.getChildren().add(button9);
+
+        // Вычисление гистограммы (6.9)
+        // Вычисление гистограммы (6.10)
 
         Scene scene = new Scene(root, 350.0, 500.0);
         stage.setTitle("OpenCV " + Core.VERSION);
@@ -346,6 +347,7 @@ public class ApplicationOpenCV extends Application {
         Mat sepia = new Mat();
         Core.transform(img, sepia, kernel);
         UtilsOpenCV.showImage(sepia, "Сепия");
+
         img.release();
         kernel.release();
         sepia.release();
@@ -434,10 +436,62 @@ public class ApplicationOpenCV extends Application {
         histBlue.release();
     }
 
-
-    // Вычисление гистограммы (6.8)
+    // Автоматическое выравнивание гистограммы изображения в градациях серого (6.8)
     private void onClickButton9(ActionEvent e) {
+        Mat img = Imgcodecs.imread(textArea.getText());
 
+        if (img.empty()) {
+            JOptionPane.showMessageDialog(null, "Неверно указан путь!", "Ошибка", 0);
+            return;
+        }
+
+        Mat img2 = new Mat();
+        Imgproc.cvtColor(img, img2, Imgproc.COLOR_BGR2GRAY);
+        Mat img3 = new Mat();
+        Imgproc.equalizeHist(img2, img3);
+
+        // Вычисляем и отрисовываем гистограммы
+        ArrayList<Mat> images = new ArrayList<Mat>();
+        images.add(img2);
+        images.add(img3);
+        Mat hist = new Mat();
+        Mat hist2 = new Mat();
+
+        Imgproc.calcHist(images, new MatOfInt(0), new Mat(), hist, new MatOfInt(256), new MatOfFloat(0, 256));
+        Imgproc.calcHist(images, new MatOfInt(1), new Mat(), hist2, new MatOfInt(256), new MatOfFloat(0, 256));
+        Core.normalize(hist, hist, 0, 128, Core.NORM_MINMAX);
+        Core.normalize(hist2, hist2, 0, 128, Core.NORM_MINMAX);
+
+        double v = 0;
+        int h = 150;
+
+        Mat imgHist = new Mat(h, 256, CvType.CV_8UC3, UtilsOpenCV.COLOR_WHITE);
+        Mat imgHist2 = new Mat(h, 256, CvType.CV_8UC3, UtilsOpenCV.COLOR_WHITE);
+
+        for (int i = 0, j = hist.rows(); i < j; i++) {
+            v = Math.round(hist.get(i, 0)[0]);
+            if (v != 0) {
+                Imgproc.line(imgHist, new Point(i, h - 1), new Point(i, h - 1 - v), UtilsOpenCV.COLOR_BLACK);
+            }
+
+            v = Math.round(hist2.get(i, 0)[0]);
+            if (v != 0) {
+                Imgproc.line(imgHist2, new Point(i, h - 1), new Point(i, h - 1 - v), UtilsOpenCV.COLOR_BLACK);
+            }
+        }
+
+        UtilsJavaFX.showImage(img2, "Оригинал");
+        UtilsJavaFX.showImage(imgHist, "Гистограмма до");
+        UtilsJavaFX.showImage(img3, "equalizeHist");
+        UtilsJavaFX.showImage(imgHist2, "Гистограмма после");
+
+        img.release();
+        img2.release();
+        img3.release();
+        imgHist.release();
+        imgHist2.release();
+        hist.release();
+        hist2.release();
     }
 
     // Вычисление гистограммы (6.9)
