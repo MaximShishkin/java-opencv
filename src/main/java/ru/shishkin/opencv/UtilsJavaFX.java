@@ -116,5 +116,4 @@ public class UtilsJavaFX {
         window.show();
     }
 
-
 }

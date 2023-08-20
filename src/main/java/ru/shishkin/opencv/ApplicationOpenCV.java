@@ -23,7 +23,6 @@ public class ApplicationOpenCV extends Application {
     private TextArea textArea;
 
     static {
-        //System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         nu.pattern.OpenCV.loadLocally();
     }
 
@@ -40,53 +39,54 @@ public class ApplicationOpenCV extends Application {
         textArea.setMaxSize(300, 10);
         root.getChildren().add(textArea);
 
-        // 6.1
+        // Получить черно-белое изображение (6.1)
         Button button = new Button("Получить черно-белое изображение");
         button.setOnAction(this::onClickButton);
         root.getChildren().add(button);
 
-        // 6.1
+        // Получить черно-белый контур (6.1)
         Button button1 = new Button("Получить черно-белый контур");
         button1.setOnAction(this::onClickButton1);
         root.getChildren().add(button1);
 
-        // 6.2
+        // Увеличение и уменьшение яркости (6.2)
         Button button2 = new Button("Увеличение и уменьшение яркости");
         button2.setOnAction(this::onClickButton2);
         root.getChildren().add(button2);
 
-        // 6.2
+        // Увеличение и уменьшение насыщенности (6.2)
         Button button3 = new Button("Увеличение и уменьшение насыщенности");
         button3.setOnAction(this::onClickButton3);
         root.getChildren().add(button3);
 
-        // 6.3
+        // Изменение цветового баланса (6.3)
         Button button4 = new Button("Изменение цветового баланса");
         button4.setOnAction(this::onClickButton4);
         root.getChildren().add(button4);
 
-        // 6.4
+        // Изменение контраста (6.4)
         Button button5 = new Button("Изменение контраста");
         button5.setOnAction(this::onClickButton5);
         root.getChildren().add(button5);
 
-
-        Button button55 = new Button("Вычисление гистограммы");
-        button55.setOnAction(this::onClickButton55);
-        root.getChildren().add(button55);
-
-        Button button6 = new Button("Изменение гистрограммы");
+        // Создание негатива изображения (6.5)
+        Button button6 = new Button("Создание негатива изображения");
         button6.setOnAction(this::onClickButton6);
         root.getChildren().add(button6);
 
-        Button button7 = new Button("Медианный фильтр");
+        // Сепия (6.6)
+        Button button7 = new Button("Сепия");
         button7.setOnAction(this::onClickButton7);
         root.getChildren().add(button7);
 
-        Button button8 = new Button("Поиск прямых линий");
+        // Вычисление гистограммы (6.7)
+        Button button8 = new Button("Вычисление гистограммы");
         button8.setOnAction(this::onClickButton8);
         root.getChildren().add(button8);
 
+        // Вычисление гистограммы (6.8)
+        // Вычисление гистограммы (6.9)
+        // Вычисление гистограммы (6.10)
         Button button9 = new Button("Эрозия и дилатация");
         button9.setOnAction(this::onClickButton9);
         root.getChildren().add(button9);
@@ -123,7 +123,7 @@ public class ApplicationOpenCV extends Application {
         img3.release();
     }
 
-    // Получить черно-белый контур (6.2)
+    // Получить черно-белый контур (6.1)
     private void onClickButton1(ActionEvent e) {
         Mat img = Imgcodecs.imread(textArea.getText());
 
@@ -351,17 +351,19 @@ public class ApplicationOpenCV extends Application {
         sepia.release();
     }
 
+    // Вычисление гистограммы (6.7)
+    private void onClickButton8(ActionEvent e) {
+        Mat img = Imgcodecs.imread(textArea.getText());
 
-    private void onClickButton55(ActionEvent e) {
-        //Вычисление гистограммы
-        Mat img = Imgcodecs.imread(getClass().getClassLoader().getResource("ElonMusk.jpg").getPath());
         if (img.empty()) {
-            System.out.println("Не удалось загрузить изображение");
+            JOptionPane.showMessageDialog(null, "Неверно указан путь!", "Ошибка", 0);
             return;
         }
+
         UtilsJavaFX.showImage(img, "Оригинал");
         Mat imgGray = new Mat();
         Imgproc.cvtColor(img, imgGray, Imgproc.COLOR_BGR2GRAY);
+
         // Вычисляем гистограммы по каналам
         ArrayList<Mat> images = new ArrayList<Mat>();
         images.add(img);
@@ -374,11 +376,13 @@ public class ApplicationOpenCV extends Application {
         Imgproc.calcHist(images, new MatOfInt(2), new Mat(), histRed, new MatOfInt(256), new MatOfFloat(0, 256));
         Imgproc.calcHist(images, new MatOfInt(1), new Mat(), histGreen, new MatOfInt(256), new MatOfFloat(0, 256));
         Imgproc.calcHist(images, new MatOfInt(0), new Mat(), histBlue, new MatOfInt(256), new MatOfFloat(0, 256));
+
         // Нормализация диапазона
         Core.normalize(histGray, histGray, 0, 128, Core.NORM_MINMAX);
         Core.normalize(histRed, histRed, 0, 128, Core.NORM_MINMAX);
         Core.normalize(histGreen, histGreen, 0, 128, Core.NORM_MINMAX);
         Core.normalize(histBlue, histBlue, 0, 128, Core.NORM_MINMAX);
+
         // Отрисовка гистограмм
         double v = 0;
         int h = 150;
@@ -386,28 +390,38 @@ public class ApplicationOpenCV extends Application {
         Mat imgHistGreen = new Mat(h, 256, CvType.CV_8UC3, UtilsOpenCV.COLOR_WHITE);
         Mat imgHistBlue = new Mat(h, 256, CvType.CV_8UC3, UtilsOpenCV.COLOR_WHITE);
         Mat imgHistGray = new Mat(h, 256, CvType.CV_8UC3, UtilsOpenCV.COLOR_WHITE);
+
         for (int i = 0, j = histGray.rows(); i < j; i++) {
             v = Math.round(histRed.get(i, 0)[0]);
+
             if (v != 0) {
                 Imgproc.line(imgHistRed, new org.opencv.core.Point(i, h - 1), new org.opencv.core.Point(i, h - 1 - v), UtilsOpenCV.COLOR_RED);
             }
+
             v = Math.round(histGreen.get(i, 0)[0]);
+
             if (v != 0) {
                 Imgproc.line(imgHistGreen, new org.opencv.core.Point(i, h - 1), new org.opencv.core.Point(i, h - 1 - v), UtilsOpenCV.COLOR_GREEN);
             }
+
             v = Math.round(histBlue.get(i, 0)[0]);
+
             if (v != 0) {
                 Imgproc.line(imgHistBlue, new org.opencv.core.Point(i, h - 1), new org.opencv.core.Point(i, h - 1 - v), UtilsOpenCV.COLOR_BLUE);
             }
+
             v = Math.round(histGray.get(i, 0)[0]);
+
             if (v != 0) {
                 Imgproc.line(imgHistGray, new org.opencv.core.Point(i, h - 1), new org.opencv.core.Point(i, h - 1 - v), UtilsOpenCV.COLOR_GRAY);
             }
         }
+
         UtilsJavaFX.showImage(imgHistRed, "Red");
         UtilsJavaFX.showImage(imgHistGreen, "Green");
         UtilsJavaFX.showImage(imgHistBlue, "Blue");
         UtilsJavaFX.showImage(imgHistGray, "Gray");
+
         img.release();
         imgGray.release();
         imgHistRed.release();
@@ -418,6 +432,22 @@ public class ApplicationOpenCV extends Application {
         histRed.release();
         histGreen.release();
         histBlue.release();
+    }
+
+
+    // Вычисление гистограммы (6.8)
+    private void onClickButton9(ActionEvent e) {
+
+    }
+
+    // Вычисление гистограммы (6.9)
+    private void onClickButton10(ActionEvent e) {
+
+    }
+
+    // Вычисление гистограммы (6.10)
+    private void onClickButton11(ActionEvent e) {
+
     }
 
     private void onClickButton66(ActionEvent e) {
@@ -498,7 +528,7 @@ public class ApplicationOpenCV extends Application {
         img4.release();
     }
 
-    private void onClickButton8(ActionEvent e) {
+    private void onClickButton88(ActionEvent e) {
         //Поиск прямых линий
         Mat img = Imgcodecs.imread(getClass().getClassLoader().getResource("ElonMusk.jpg").getPath());
         if (img.empty()) {
@@ -527,7 +557,7 @@ public class ApplicationOpenCV extends Application {
         result.release();
     }
 
-    private void onClickButton9(ActionEvent e) {
+    private void onClickButton99(ActionEvent e) {
         //Дилатация и жрозия ищображения
         Mat img = Imgcodecs.imread(getClass().getClassLoader().getResource("ElonMusk.jpg").getPath());
         if (img.empty()) {
