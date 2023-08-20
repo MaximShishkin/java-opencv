@@ -128,9 +128,16 @@ public class UtilsOpenCV {
     }
 
     public static boolean saveMat(Mat m, String path) {
-        if (m == null || m.empty()) return false;
-        if (path == null || path.length() < 5 || !path.endsWith(".mat")) return false;
+        if (m == null || m.empty()) {
+            return false;
+        }
+
+        if (path == null || path.length() < 5 || !path.endsWith(".mat")) {
+            return false;
+        }
+
         if (m.depth() == CvType.CV_8U) {
+
         } else if (m.depth() == CvType.CV_16U) {
             Mat m_16 = new Mat();
             m.convertTo(m_16, CvType.CV_8U, 255.0 / 65535);
@@ -139,10 +146,17 @@ public class UtilsOpenCV {
             Mat m_32 = new Mat();
             m.convertTo(m_32, CvType.CV_8U, 255);
             m = m_32;
-        } else return false;
-        if (m.channels() == 2 || m.channels() > 4) return false;
+        } else {
+            return false;
+        }
+
+        if (m.channels() == 2 || m.channels() > 4) {
+            return false;
+        }
+
         byte[] buf = new byte[m.channels() * m.cols() * m.rows()];
         m.get(0, 0, buf);
+
         try (
                 OutputStream out = new FileOutputStream(path);
                 BufferedOutputStream bout = new BufferedOutputStream(out);

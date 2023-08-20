@@ -326,6 +326,32 @@ public class ApplicationOpenCV extends Application {
         m.release();
     }
 
+    // Сепия (6.6)
+    private void onClickButton7(ActionEvent e) {
+        Mat img = Imgcodecs.imread(textArea.getText());
+
+        if (img.empty()) {
+            JOptionPane.showMessageDialog(null, "Неверно указан путь!", "Ошибка", 0);
+            return;
+        }
+
+        // Построение матрицы трансформации
+        Mat kernel = new Mat(3, 3, CvType.CV_32FC1);
+        kernel.put(0, 0,
+                0.131, 0.534, 0.272, // blue  = b * b1 + g * g1 + r * r1
+                0.168, 0.686, 0.349, // green = b * b2 + g * g2 + r * r2
+                0.189, 0.769, 0.393  // red   = b * b3 + g * g3 + r * r3
+        );
+
+        Mat sepia = new Mat();
+        Core.transform(img, sepia, kernel);
+        UtilsOpenCV.showImage(sepia, "Сепия");
+        img.release();
+        kernel.release();
+        sepia.release();
+    }
+
+
     private void onClickButton55(ActionEvent e) {
         //Вычисление гистограммы
         Mat img = Imgcodecs.imread(getClass().getClassLoader().getResource("ElonMusk.jpg").getPath());
@@ -449,7 +475,7 @@ public class ApplicationOpenCV extends Application {
         hist2.release();
     }
 
-    private void onClickButton7(ActionEvent e) {
+    private void onClickButton77(ActionEvent e) {
         //Медианный фильтр
         Mat img = Imgcodecs.imread(getClass().getClassLoader().getResource("ElonMusk.jpg").getPath());
         if (img.empty()) {

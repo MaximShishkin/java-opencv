@@ -49,6 +49,7 @@ public class UtilsJavaFX {
             Imgproc.cvtColor(m, m_bgra, Imgproc.COLOR_BGR2BGRA);
             m = m_bgra;
         } else if (m.channels() == 4) {
+
         } else {
             return null;
         }
