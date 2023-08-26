@@ -27,8 +27,7 @@ public class OpenCVSearchObject {
         for (int i = 0, r = lines.rows(); i < r; i++) {
             for (int j = 0, c = lines.cols(); j < c; j++) {
                 double[] line = lines.get(i, j);
-                Imgproc.line(result, new org.opencv.core.Point(line[0], line[1]),
-                        new Point(line[2], line[3]), OpenCVUtils.COLOR_BLACK);
+                Imgproc.line(result, new org.opencv.core.Point(line[0], line[1]), new Point(line[2], line[3]), OpenCVUtils.COLOR_BLACK);
             }
         }
         JavaFXUtils.showImage(result, "Результат поиска прямых линий");

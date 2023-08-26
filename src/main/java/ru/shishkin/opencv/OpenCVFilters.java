@@ -81,7 +81,11 @@ public class OpenCVFilters {
         img4.release();
     }
 
-    // 7.3
+    // 7.1.6.
+
+    // 7.2.
+
+    // 7.3.
     private void onClickButton99(ActionEvent e) {
         //Дилатация и жрозия ищображения
         Mat img = Imgcodecs.imread(getClass().getClassLoader().getResource("ElonMusk.jpg").getPath());
@@ -98,4 +102,16 @@ public class OpenCVFilters {
         Imgproc.erode(img, img3, kernel);
         JavaFXUtils.showImage(img3, "Илон Маск с эрозией");
     }
+
+    // 7.4.
+
+    // 7.5.
+
+    // 7.6.1.
+
+    // 7.6.2.
+
+    // 7.7.
+
+    // 7.8.
 }

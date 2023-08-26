@@ -386,7 +386,6 @@ public class OpenCVColorComponents {
 
     // 6.10. Различные цветовые палитры
     protected void method610(Mat img) {
-        System.out.println(img.size());
         Imgproc.resize(img, img, new Size(), 0.6, 0.6, Imgproc.INTER_LINEAR);
         JavaFXUtils.showImage(img, "Оригинал");
 
