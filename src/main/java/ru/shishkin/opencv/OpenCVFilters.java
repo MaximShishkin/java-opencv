@@ -1,6 +1,8 @@
 package ru.shishkin.opencv;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.TextArea;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
@@ -8,10 +10,21 @@ import org.opencv.core.Size;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 
-public class OpenCVFilters {
-    // Вычисление гистограммы (6.10)
-    private void onClickButton12(ActionEvent e) {
+import javax.swing.*;
 
+// 7. Применение фильтров
+public class OpenCVFilters {
+    // 7.1.1. Метод blur(): однородное сглаживание
+    protected void onClickButton12(Mat img) {
+        Mat img2 = new Mat();
+        Imgproc.blur(img, img2, new Size(3, 3));
+        UtilsJavaFX.showImage(img2, "Size(3, 3)");
+        Mat img3 = new Mat();
+        Imgproc.blur(img, img3, new Size(45, 45), new Point(-1, -1));
+        UtilsJavaFX.showImage(img3, "Size(45, 45)");
+        img.release();
+        img2.release();
+        img3.release();
     }
 
     private void onClickButton77(ActionEvent e) {
@@ -81,5 +94,25 @@ public class OpenCVFilters {
         Mat img3 = new Mat();
         Imgproc.erode(img, img3, kernel);
         UtilsJavaFX.showImage(img3, "Илон Маск с эрозией");
+    }
+
+    public static void onClickButton1222(ActionEvent e) {
+        TextArea textArea = new TextArea("D:\\Files\\MakShish\\Desktop\\ElonMusk.jpg");
+        Mat img = Imgcodecs.imread(textArea.getText());
+
+        if (img.empty()) {
+            JOptionPane.showMessageDialog(null, "Неверно указан путь!", "Ошибка", 0);
+            return;
+        }
+
+        Mat img2 = new Mat();
+        Imgproc.blur(img, img2, new Size(3, 3));
+        UtilsJavaFX.showImage(img2, "Size(3, 3)");
+        Mat img3 = new Mat();
+        Imgproc.blur(img, img3, new Size(45, 45), new Point(-1, -1));
+        UtilsJavaFX.showImage(img3, "Size(45, 45)");
+        img.release();
+        img2.release();
+        img3.release();
     }
 }

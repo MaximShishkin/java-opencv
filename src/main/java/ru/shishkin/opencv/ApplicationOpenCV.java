@@ -98,7 +98,12 @@ public class ApplicationOpenCV extends Application {
         button11.setOnAction(this::onClickButton11);
         root.getChildren().add(button11);
 
-        Scene scene = new Scene(root, 350.0, 500.0);
+        // 7.1.1. Метод blur(): однородное сглаживание
+        Button button12 = new Button("Однородное сглаживание");
+        button12.setOnAction(this::onClickButton12);
+        root.getChildren().add(button12);
+
+        Scene scene = new Scene(root);
         stage.setTitle("OpenCV " + Core.VERSION);
         stage.setScene(scene);
         stage.setOnCloseRequest(event -> {
@@ -603,4 +608,15 @@ public class ApplicationOpenCV extends Application {
         img2.release();
     }
 
+    // 7.1.1. Метод blur(): однородное сглаживание
+    private void onClickButton12(ActionEvent e) {
+        Mat img = Imgcodecs.imread(textArea.getText());
+
+        if (img.empty()) {
+            JOptionPane.showMessageDialog(null, "Неверно указан путь!", "Ошибка", 0);
+            return;
+        }
+
+        new OpenCVFilters().onClickButton12(img);
+    }
 }
