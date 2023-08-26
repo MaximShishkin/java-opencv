@@ -1,7 +1,6 @@
 package ru.shishkin.opencv;
 
 import javafx.event.ActionEvent;
-import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Size;
@@ -46,6 +45,19 @@ public class OpenCVFilters {
         img4.release();
     }
 
+    // 7.1.3. Метод bilateralFilter(): двустороннее сглаживание
+    protected void bilateralFilter(Mat img) {
+        Mat img2 = new Mat();
+        Imgproc.bilateralFilter(img, img2, 5, 5 * 2, 5 * 2);
+        JavaFXUtils.showImage(img2, "d = 5");
+        Mat img3 = new Mat();
+        Imgproc.bilateralFilter(img, img3, 9, 9 * 2, 9 * 2);
+        JavaFXUtils.showImage(img3, "d = 9");
+        img.release();
+        img2.release();
+        img3.release();
+    }
+
     // 7.1.5.
     private void onClickButton77(ActionEvent e) {
         //Медианный фильтр
@@ -86,34 +98,5 @@ public class OpenCVFilters {
         Mat img3 = new Mat();
         Imgproc.erode(img, img3, kernel);
         JavaFXUtils.showImage(img3, "Илон Маск с эрозией");
-    }
-
-    private void onClickButton88(ActionEvent e) {
-        //Поиск прямых линий
-        Mat img = Imgcodecs.imread(getClass().getClassLoader().getResource("ElonMusk.jpg").getPath());
-        if (img.empty()) {
-            System.out.println("Не удалось загрузить изображение");
-            return;
-        }
-        Mat imgGray = new Mat();
-        Imgproc.cvtColor(img, imgGray, Imgproc.COLOR_BGR2GRAY);
-        Mat edges = new Mat();
-        Imgproc.Canny(imgGray, edges, 80, 200);
-        JavaFXUtils.showImage(edges, "Илон Маск с применением Canny");
-        Mat lines = new Mat();
-        Imgproc.HoughLinesP(edges, lines, 1, Math.toRadians(2), 20, 30, 0);
-        Mat result = new Mat(img.size(), CvType.CV_8UC3, OpenCVUtils.COLOR_WHITE);
-        for (int i = 0, r = lines.rows(); i < r; i++) {
-            for (int j = 0, c = lines.cols(); j < c; j++) {
-                double[] line = lines.get(i, j);
-                Imgproc.line(result, new org.opencv.core.Point(line[0], line[1]),
-                        new Point(line[2], line[3]), OpenCVUtils.COLOR_BLACK);
-            }
-        }
-        JavaFXUtils.showImage(result, "Результат поиска прямых линий");
-        img.release();
-        imgGray.release();
-        edges.release();
-        result.release();
     }
 }
