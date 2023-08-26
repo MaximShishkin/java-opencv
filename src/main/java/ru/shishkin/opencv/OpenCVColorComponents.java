@@ -180,6 +180,7 @@ public class OpenCVColorComponents {
         Mat negative = new Mat();
         Core.subtract(m, img, negative);
         OpenCVUtils.showImage(negative, "Негатив");
+
         img.release();
         negative.release();
         m.release();
@@ -392,30 +393,43 @@ public class OpenCVColorComponents {
         Mat img2 = new Mat();
         Imgproc.applyColorMap(img, img2, Imgproc.COLORMAP_AUTUMN);
         JavaFXUtils.showImage(img2, "COLORMAP_AUTUMN");
+
         Imgproc.applyColorMap(img, img2, Imgproc.COLORMAP_BONE);
         JavaFXUtils.showImage(img2, "COLORMAP_BONE");
+
         Imgproc.applyColorMap(img, img2, Imgproc.COLORMAP_COOL);
         JavaFXUtils.showImage(img2, "COLORMAP_COOL");
+
         Imgproc.applyColorMap(img, img2, Imgproc.COLORMAP_HOT);
         JavaFXUtils.showImage(img2, "COLORMAP_HOT");
+
         Imgproc.applyColorMap(img, img2, Imgproc.COLORMAP_HSV);
         JavaFXUtils.showImage(img2, "COLORMAP_HSV");
+
         Imgproc.applyColorMap(img, img2, Imgproc.COLORMAP_JET);
         JavaFXUtils.showImage(img2, "COLORMAP_JET");
+
         Imgproc.applyColorMap(img, img2, Imgproc.COLORMAP_OCEAN);
         JavaFXUtils.showImage(img2, "COLORMAP_OCEAN");
+
         Imgproc.applyColorMap(img, img2, Imgproc.COLORMAP_PARULA);
         JavaFXUtils.showImage(img2, "COLORMAP_PARULA");
+
         Imgproc.applyColorMap(img, img2, Imgproc.COLORMAP_PINK);
         JavaFXUtils.showImage(img2, "COLORMAP_PINK");
+
         Imgproc.applyColorMap(img, img2, Imgproc.COLORMAP_RAINBOW);
         JavaFXUtils.showImage(img2, "COLORMAP_RAINBOW");
+
         Imgproc.applyColorMap(img, img2, Imgproc.COLORMAP_SPRING);
         JavaFXUtils.showImage(img2, "COLORMAP_SPRING");
+
         Imgproc.applyColorMap(img, img2, Imgproc.COLORMAP_SUMMER);
         JavaFXUtils.showImage(img2, "COLORMAP_SUMMER");
+
         Imgproc.applyColorMap(img, img2, Imgproc.COLORMAP_WINTER);
         JavaFXUtils.showImage(img2, "COLORMAP_WINTER");
+
         img.release();
         img2.release();
     }

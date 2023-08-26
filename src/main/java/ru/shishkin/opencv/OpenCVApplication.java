@@ -11,7 +11,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.opencv.core.*;
 import org.opencv.imgcodecs.Imgcodecs;
-import org.opencv.imgproc.CLAHE;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -100,6 +99,11 @@ public class OpenCVApplication extends Application {
         Button button12 = new Button("Однородное сглаживание");
         button12.setOnAction(this::onClickButton12);
         root.getChildren().add(button12);
+
+        // 7.1.2. Размытие по Гауссу
+        Button button13 = new Button("Размытие по Гауссу");
+        button13.setOnAction(this::onClickButton13);
+        root.getChildren().add(button13);
 
         Scene scene = new Scene(root);
         stage.setTitle("OpenCV " + Core.VERSION);
@@ -263,6 +267,18 @@ public class OpenCVApplication extends Application {
             return;
         }
 
-        new OpenCVFilters().method711(img);
+        new OpenCVFilters().blur(img);
+    }
+
+    // 7.1.2. Размытие по Гауссу
+    private void onClickButton13(ActionEvent e) {
+        Mat img = Imgcodecs.imread(textArea.getText());
+
+        if (img.empty()) {
+            JOptionPane.showMessageDialog(null, "Неверно указан путь!", "Ошибка", 0);
+            return;
+        }
+
+        new OpenCVFilters().gaussianBlur(img);
     }
 }
