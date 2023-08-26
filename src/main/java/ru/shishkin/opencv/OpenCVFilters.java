@@ -50,9 +50,11 @@ public class OpenCVFilters {
         Mat img2 = new Mat();
         Imgproc.bilateralFilter(img, img2, 5, 5 * 2, 5 * 2);
         JavaFXUtils.showImage(img2, "d = 5");
+
         Mat img3 = new Mat();
         Imgproc.bilateralFilter(img, img3, 9, 9 * 2, 9 * 2);
         JavaFXUtils.showImage(img3, "d = 9");
+
         img.release();
         img2.release();
         img3.release();

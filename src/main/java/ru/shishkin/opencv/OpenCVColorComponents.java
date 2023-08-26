@@ -9,7 +9,7 @@ import java.util.ArrayList;
 // 6. Изменение значений компонентов цвета
 public class OpenCVColorComponents {
     // 6.1.1. Получить черно-белое изображение
-    protected void method611(Mat img) {
+    protected void getBlackWhiteImage(Mat img) {
         Mat img2 = new Mat();
         Imgproc.cvtColor(img, img2, Imgproc.COLOR_BGR2GRAY);
 

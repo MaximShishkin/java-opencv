@@ -7,7 +7,9 @@ import org.opencv.core.Point;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 
+// 8. Поиск объектов
 public class OpenCVSearchObject {
+
     private void onClickButton88(ActionEvent e) {
         //Поиск прямых линий
         Mat img = Imgcodecs.imread(getClass().getClassLoader().getResource("ElonMusk.jpg").getPath());

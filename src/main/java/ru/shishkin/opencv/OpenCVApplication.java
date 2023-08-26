@@ -105,6 +105,11 @@ public class OpenCVApplication extends Application {
         button13.setOnAction(this::onClickButton13);
         root.getChildren().add(button13);
 
+        // 7.1.3. Метод bilateralFilter(): двустороннее сглаживание
+        Button button14 = new Button("Двустороннее сглаживание");
+        button14.setOnAction(this::onClickButton14);
+        root.getChildren().add(button14);
+
         Scene scene = new Scene(root);
         stage.setTitle("OpenCV " + Core.VERSION);
         stage.setScene(scene);
@@ -123,7 +128,7 @@ public class OpenCVApplication extends Application {
             return;
         }
 
-        new OpenCVColorComponents().method611(img);
+        new OpenCVColorComponents().getBlackWhiteImage(img);
     }
 
     // 6.1.2. Получить черно-белый контур
@@ -280,5 +285,17 @@ public class OpenCVApplication extends Application {
         }
 
         new OpenCVFilters().gaussianBlur(img);
+    }
+
+    // 7.1.3. Метод bilateralFilter(): двустороннее сглаживание
+    private void onClickButton14(ActionEvent e) {
+        Mat img = Imgcodecs.imread(textArea.getText());
+
+        if (img.empty()) {
+            JOptionPane.showMessageDialog(null, "Неверно указан путь!", "Ошибка", 0);
+            return;
+        }
+
+        new OpenCVFilters().bilateralFilter(img);
     }
 }
