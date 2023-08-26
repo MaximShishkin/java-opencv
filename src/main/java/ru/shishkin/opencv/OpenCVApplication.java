@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 import org.opencv.core.*;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.CLAHE;
-import org.opencv.imgproc.Imgproc;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -120,7 +119,7 @@ public class OpenCVApplication extends Application {
             return;
         }
 
-        new OpenCVColorComponents().onClickButton(img);
+        new OpenCVColorComponents().method611(img);
     }
 
     // 6.1.2. Получить черно-белый контур
@@ -132,7 +131,7 @@ public class OpenCVApplication extends Application {
             return;
         }
 
-        new OpenCVColorComponents().onClickButton1(img);
+        new OpenCVColorComponents().method612(img);
     }
 
     // 6.2.1. Увеличение и уменьшение яркости
@@ -144,7 +143,7 @@ public class OpenCVApplication extends Application {
             return;
         }
 
-        new OpenCVColorComponents().onClickButton2(img);
+        new OpenCVColorComponents().method621(img);
     }
 
     // 6.2.2. Увеличение и уменьшение насыщенности
@@ -156,7 +155,7 @@ public class OpenCVApplication extends Application {
             return;
         }
 
-        new OpenCVColorComponents().onClickButton3(img);
+        new OpenCVColorComponents().method622(img);
     }
 
     // 6.3. Изменение цветового баланса
@@ -168,7 +167,7 @@ public class OpenCVApplication extends Application {
             return;
         }
 
-        new OpenCVColorComponents().onClickButton4(img);
+        new OpenCVColorComponents().method63(img);
     }
 
     // 6.4. Изменение контраста
@@ -180,7 +179,7 @@ public class OpenCVApplication extends Application {
             return;
         }
 
-        new OpenCVColorComponents().onClickButton5(img);
+        new OpenCVColorComponents().method64(img);
     }
 
     // 6.5. Создание негатива изображения
@@ -192,7 +191,7 @@ public class OpenCVApplication extends Application {
             return;
         }
 
-        new OpenCVColorComponents().onClickButton6(img);
+        new OpenCVColorComponents().method65(img);
     }
 
     // 6.6. Сепия
@@ -204,7 +203,7 @@ public class OpenCVApplication extends Application {
             return;
         }
 
-        new OpenCVColorComponents().onClickButton7(img);
+        new OpenCVColorComponents().method66(img);
     }
 
     // 6.7. Вычисление гистограммы
@@ -216,7 +215,7 @@ public class OpenCVApplication extends Application {
             return;
         }
 
-        new OpenCVColorComponents().onClickButton8(img);
+        new OpenCVColorComponents().method67(img);
     }
 
     // 6.8. Автоматическое выравнивание гистограммы изображения в градациях серого
@@ -228,7 +227,7 @@ public class OpenCVApplication extends Application {
             return;
         }
 
-        new OpenCVColorComponents().onClickButton9(img);
+        new OpenCVColorComponents().method68(img);
     }
 
     // 6.9. Адаптивное выравнивание гистограммы с помощью алгоритма CLAHE
@@ -240,7 +239,7 @@ public class OpenCVApplication extends Application {
             return;
         }
 
-        new OpenCVColorComponents().onClickButton10(img);
+        new OpenCVColorComponents().method69(img);
     }
 
     // 6.10. Различные цветовые палитры
@@ -252,7 +251,7 @@ public class OpenCVApplication extends Application {
             return;
         }
 
-        new OpenCVColorComponents().onClickButton11(img);
+        new OpenCVColorComponents().method610(img);
     }
 
     // 7.1.1. Метод blur(): однородное сглаживание
@@ -264,6 +263,6 @@ public class OpenCVApplication extends Application {
             return;
         }
 
-        new OpenCVFilters().onClickButton12(img);
+        new OpenCVFilters().method711(img);
     }
 }

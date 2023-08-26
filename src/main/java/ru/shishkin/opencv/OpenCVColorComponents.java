@@ -9,7 +9,7 @@ import java.util.ArrayList;
 // 6. Изменение значений компонентов цвета
 public class OpenCVColorComponents {
     // 6.1.1. Получить черно-белое изображение
-    protected void onClickButton(Mat img) {
+    protected void method611(Mat img) {
         Mat img2 = new Mat();
         Imgproc.cvtColor(img, img2, Imgproc.COLOR_BGR2GRAY);
 
@@ -25,7 +25,7 @@ public class OpenCVColorComponents {
     }
 
     // 6.1.2. Получить черно-белый контур
-    protected void onClickButton1(Mat img) {
+    protected void method612(Mat img) {
         Mat img2 = new Mat();
         Imgproc.cvtColor(img, img2, Imgproc.COLOR_BGR2GRAY);
 
@@ -61,7 +61,7 @@ public class OpenCVColorComponents {
     }
 
     // 6.2.1. Увеличение и уменьшение яркости
-    protected void onClickButton2(Mat img) {
+    protected void method621(Mat img) {
         // Уменьшение яркости
         Mat imgHSV1 = new Mat();
         Imgproc.cvtColor(img, imgHSV1, Imgproc.COLOR_BGR2HSV);
@@ -88,7 +88,7 @@ public class OpenCVColorComponents {
     }
 
     // 6.2.2. Увеличение и уменьшение насыщенности
-    protected void onClickButton3(Mat img) {
+    protected void method622(Mat img) {
         // Увеличение насыщенности
         Mat imgHSV = new Mat();
         Imgproc.cvtColor(img, imgHSV, Imgproc.COLOR_BGR2HSV);
@@ -115,7 +115,7 @@ public class OpenCVColorComponents {
     }
 
     // 6.3. Изменение цветового баланса
-    protected void onClickButton4(Mat img) {
+    protected void method63(Mat img) {
         // Положение цвета от зеленого до красного
         Mat imgLab = new Mat();
         Imgproc.cvtColor(img, imgLab, Imgproc.COLOR_BGR2Lab);
@@ -142,7 +142,7 @@ public class OpenCVColorComponents {
     }
 
     // 6.4. Изменение контраста
-    protected void onClickButton5(Mat img) {
+    protected void method64(Mat img) {
         // Вычисление средней яркости изображения
         Scalar meanBGR = Core.mean(img);
         double mean = meanBGR.val[0] * 0.114 + meanBGR.val[1] * 0.587 + meanBGR.val[2] * 0.299;
@@ -175,7 +175,7 @@ public class OpenCVColorComponents {
     }
 
     // 6.5. Создание негатива изображения
-    protected void onClickButton6(Mat img) {
+    protected void method65(Mat img) {
         Mat m = new Mat(img.rows(), img.cols(), img.type(), OpenCVUtils.COLOR_WHITE);
         Mat negative = new Mat();
         Core.subtract(m, img, negative);
@@ -186,7 +186,7 @@ public class OpenCVColorComponents {
     }
 
     // 6.6. Сепия
-    protected void onClickButton7(Mat img) {
+    protected void method66(Mat img) {
         // Построение матрицы трансформации
         Mat kernel = new Mat(3, 3, CvType.CV_32FC1);
         kernel.put(0, 0,
@@ -205,7 +205,7 @@ public class OpenCVColorComponents {
     }
 
     // 6.7. Вычисление гистограммы
-    protected void onClickButton8(Mat img) {
+    protected void method67(Mat img) {
         JavaFXUtils.showImage(img, "Оригинал");
         Mat imgGray = new Mat();
         Imgproc.cvtColor(img, imgGray, Imgproc.COLOR_BGR2GRAY);
@@ -281,7 +281,7 @@ public class OpenCVColorComponents {
     }
 
     // 6.8. Автоматическое выравнивание гистограммы изображения в градациях серого
-    protected void onClickButton9(Mat img) {
+    protected void method68(Mat img) {
         Mat img2 = new Mat();
         Imgproc.cvtColor(img, img2, Imgproc.COLOR_BGR2GRAY);
         Mat img3 = new Mat();
@@ -332,7 +332,7 @@ public class OpenCVColorComponents {
     }
 
     // 6.9. Адаптивное выравнивание гистограммы с помощью алгоритма CLAHE
-    protected void onClickButton10(Mat img) {
+    protected void method69(Mat img) {
         Mat img2 = new Mat();
         Imgproc.cvtColor(img, img2, Imgproc.COLOR_BGR2GRAY);
         Mat img3 = new Mat();
@@ -384,7 +384,7 @@ public class OpenCVColorComponents {
     }
 
     // 6.10. Различные цветовые палитры
-    protected void onClickButton11(Mat img) {
+    protected void method610(Mat img) {
         System.out.println(img.size());
         Imgproc.resize(img, img, new Size(), 0.6, 0.6, Imgproc.INTER_LINEAR);
         JavaFXUtils.showImage(img, "Оригинал");

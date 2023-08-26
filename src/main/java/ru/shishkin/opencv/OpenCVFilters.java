@@ -14,7 +14,7 @@ import javax.swing.*;
 // 7. Применение фильтров
 public class OpenCVFilters {
     // 7.1.1. Метод blur(): однородное сглаживание
-    protected void onClickButton12(Mat img) {
+    protected void method711(Mat img) {
         Mat img2 = new Mat();
         Imgproc.blur(img, img2, new Size(3, 3));
         JavaFXUtils.showImage(img2, "Size(3, 3)");
