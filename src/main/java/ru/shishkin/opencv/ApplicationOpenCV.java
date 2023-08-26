@@ -89,7 +89,12 @@ public class ApplicationOpenCV extends Application {
         button9.setOnAction(this::onClickButton9);
         root.getChildren().add(button9);
 
-        // Вычисление гистограммы (6.9)
+        // Адаптивное выравнивание гистограммы с помощью алгоритма CLAHE (6.9)
+        Button button10 = new Button("Выравнивание гистограммы с CLAHE");
+        button10.setOnAction(this::onClickButton10);
+        root.getChildren().add(button10);
+
+
         // Вычисление гистограммы (6.10)
 
         Scene scene = new Scene(root, 350.0, 500.0);
@@ -494,14 +499,21 @@ public class ApplicationOpenCV extends Application {
         hist2.release();
     }
 
-    // Вычисление гистограммы (6.9)
+    // Адаптивное выравнивание гистограммы с помощью алгоритма CLAHE (6.9)
     private void onClickButton10(ActionEvent e) {
+        Mat img = Imgcodecs.imread(textArea.getText());
 
-    }
+        if (img.empty()) {
+            JOptionPane.showMessageDialog(null, "Неверно указан путь!", "Ошибка", 0);
+            return;
+        }
 
-    // Вычисление гистограммы (6.10)
-    private void onClickButton11(ActionEvent e) {
-
+        Mat img2 = new Mat();
+        Imgproc.cvtColor(img, img2, Imgproc.COLOR_BGR2GRAY);
+        Mat img3 = new Mat();
+        CLAHE clane = Imgproc.createCLAHE();
+        clane.setClipLimit(4);
+        clane.apply(img2, img3);
     }
 
     private void onClickButton66(ActionEvent e) {
@@ -557,6 +569,11 @@ public class ApplicationOpenCV extends Application {
         imgHist2.release();
         hist.release();
         hist2.release();
+    }
+
+    // Вычисление гистограммы (6.10)
+    private void onClickButton12(ActionEvent e) {
+
     }
 
     private void onClickButton77(ActionEvent e) {
