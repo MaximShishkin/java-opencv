@@ -60,24 +60,21 @@ public class OpenCVFilters {
         img3.release();
     }
 
-    // 7.1.5.
-    private void onClickButton77(ActionEvent e) {
-        //Медианный фильтр
-        Mat img = Imgcodecs.imread(getClass().getClassLoader().getResource("ElonMusk.jpg").getPath());
-        if (img.empty()) {
-            System.out.println("Не удалось загрузить изображение");
-            return;
-        }
+    // 7.1.5. Медианный фильтр
+    protected void medianBlur(Mat img) {
         Mat img2 = new Mat();
         JavaFXUtils.showImage(img, "Илон Маск");
         Imgproc.medianBlur(img, img2, 3);
         JavaFXUtils.showImage(img2, "Илон Маск с параметром фильтра 3");
+
         Mat img3 = new Mat();
         Imgproc.medianBlur(img, img3, 5);
         JavaFXUtils.showImage(img3, "Илон Маск с параметром фильтра 5");
+
         Mat img4 = new Mat();
         Imgproc.medianBlur(img, img4, 45);
         JavaFXUtils.showImage(img4, "Илон Маск с параметром фильтра 45");
+
         img.release();
         img2.release();
         img3.release();

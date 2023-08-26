@@ -9,9 +9,8 @@ import org.opencv.imgproc.Imgproc;
 
 // 8. Поиск объектов
 public class OpenCVSearchObject {
-
+    // 8.5. Поиск прямых линий
     private void onClickButton88(ActionEvent e) {
-        //Поиск прямых линий
         Mat img = Imgcodecs.imread(getClass().getClassLoader().getResource("ElonMusk.jpg").getPath());
         if (img.empty()) {
             System.out.println("Не удалось загрузить изображение");

@@ -433,5 +433,4 @@ public class OpenCVColorComponents {
         img.release();
         img2.release();
     }
-
 }

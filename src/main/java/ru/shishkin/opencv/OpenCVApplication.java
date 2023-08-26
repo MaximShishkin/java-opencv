@@ -110,6 +110,11 @@ public class OpenCVApplication extends Application {
         button14.setOnAction(this::onClickButton14);
         root.getChildren().add(button14);
 
+        // 7.1.5. Медианный фильтр
+        Button button15 = new Button("Медианный фильтр");
+        button15.setOnAction(this::onClickButton15);
+        root.getChildren().add(button15);
+
         Scene scene = new Scene(root);
         stage.setTitle("OpenCV " + Core.VERSION);
         stage.setScene(scene);
@@ -297,5 +302,17 @@ public class OpenCVApplication extends Application {
         }
 
         new OpenCVFilters().bilateralFilter(img);
+    }
+
+    // 7.1.5. Медианный фильтр
+    private void onClickButton15(ActionEvent e) {
+        Mat img = Imgcodecs.imread(textArea.getText());
+
+        if (img.empty()) {
+            JOptionPane.showMessageDialog(null, "Неверно указан путь!", "Ошибка", 0);
+            return;
+        }
+
+        new OpenCVFilters().medianBlur(img);
     }
 }
