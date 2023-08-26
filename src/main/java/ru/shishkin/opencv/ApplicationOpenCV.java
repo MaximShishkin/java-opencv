@@ -88,13 +88,13 @@ public class ApplicationOpenCV extends Application {
         button9.setOnAction(this::onClickButton9);
         root.getChildren().add(button9);
 
-        // Алгоритм CLAHE (6.9)
-        Button button10 = new Button("Алгоритм CLAHE");
+        // Адаптивное выравнивание гистограммы с помощью алгоритма CLAHE (6.9)
+        Button button10 = new Button("Выравнивание гистограммы с CLAHE");
         button10.setOnAction(this::onClickButton10);
         root.getChildren().add(button10);
 
-        // Адаптивное выравнивание гистограммы с помощью алгоритма CLAHE (6.9)
-        Button button11 = new Button("Выравнивание гистограммы с CLAHE");
+        // Различные цветовые палитры (6.10)
+        Button button11 = new Button("Различные цветовые палитры");
         button11.setOnAction(this::onClickButton11);
         root.getChildren().add(button11);
 
@@ -500,25 +500,8 @@ public class ApplicationOpenCV extends Application {
         hist2.release();
     }
 
-    // Алгоритм CLAHE (6.9)
-    private void onClickButton10(ActionEvent e) {
-        Mat img = Imgcodecs.imread(textArea.getText());
-
-        if (img.empty()) {
-            JOptionPane.showMessageDialog(null, "Неверно указан путь!", "Ошибка", 0);
-            return;
-        }
-
-        Mat img2 = new Mat();
-        Imgproc.cvtColor(img, img2, Imgproc.COLOR_BGR2GRAY);
-        Mat img3 = new Mat();
-        CLAHE clane = Imgproc.createCLAHE();
-        clane.setClipLimit(4);
-        clane.apply(img2, img3);
-    }
-
     // Адаптивное выравнивание гистограммы с помощью алгоритма CLAHE (6.9)
-    private void onClickButton11(ActionEvent e) {
+    private void onClickButton10(ActionEvent e) {
         Mat img = Imgcodecs.imread(textArea.getText());
 
         if (img.empty()) {
@@ -576,78 +559,48 @@ public class ApplicationOpenCV extends Application {
         hist2.release();
     }
 
-    // Вычисление гистограммы (6.10)
-    private void onClickButton12(ActionEvent e) {
+    // Различные цветовые палитры (6.10)
+    private void onClickButton11(ActionEvent e) {
+        Mat img = Imgcodecs.imread(textArea.getText());
 
-    }
-
-    private void onClickButton77(ActionEvent e) {
-        //Медианный фильтр
-        Mat img = Imgcodecs.imread(getClass().getClassLoader().getResource("ElonMusk.jpg").getPath());
         if (img.empty()) {
-            System.out.println("Не удалось загрузить изображение");
+            JOptionPane.showMessageDialog(null, "Неверно указан путь!", "Ошибка", 0);
             return;
         }
+
+        System.out.println(img.size());
+        Imgproc.resize(img, img, new Size(), 0.6, 0.6, Imgproc.INTER_LINEAR);
+        UtilsJavaFX.showImage(img, "Оригинал");
+
         Mat img2 = new Mat();
-        UtilsJavaFX.showImage(img, "Илон Маск");
-        Imgproc.medianBlur(img, img2, 3);
-        UtilsJavaFX.showImage(img2, "Илон Маск с параметром фильтра 3");
-        Mat img3 = new Mat();
-        Imgproc.medianBlur(img, img3, 5);
-        UtilsJavaFX.showImage(img3, "Илон Маск с параметром фильтра 5");
-        Mat img4 = new Mat();
-        Imgproc.medianBlur(img, img4, 45);
-        UtilsJavaFX.showImage(img4, "Илон Маск с параметром фильтра 45");
+        Imgproc.applyColorMap(img, img2, Imgproc.COLORMAP_AUTUMN);
+        UtilsJavaFX.showImage(img2, "COLORMAP_AUTUMN");
+        Imgproc.applyColorMap(img, img2, Imgproc.COLORMAP_BONE);
+        UtilsJavaFX.showImage(img2, "COLORMAP_BONE");
+        Imgproc.applyColorMap(img, img2, Imgproc.COLORMAP_COOL);
+        UtilsJavaFX.showImage(img2, "COLORMAP_COOL");
+        Imgproc.applyColorMap(img, img2, Imgproc.COLORMAP_HOT);
+        UtilsJavaFX.showImage(img2, "COLORMAP_HOT");
+        Imgproc.applyColorMap(img, img2, Imgproc.COLORMAP_HSV);
+        UtilsJavaFX.showImage(img2, "COLORMAP_HSV");
+        Imgproc.applyColorMap(img, img2, Imgproc.COLORMAP_JET);
+        UtilsJavaFX.showImage(img2, "COLORMAP_JET");
+        Imgproc.applyColorMap(img, img2, Imgproc.COLORMAP_OCEAN);
+        UtilsJavaFX.showImage(img2, "COLORMAP_OCEAN");
+        Imgproc.applyColorMap(img, img2, Imgproc.COLORMAP_PARULA);
+        UtilsJavaFX.showImage(img2, "COLORMAP_PARULA");
+        Imgproc.applyColorMap(img, img2, Imgproc.COLORMAP_PINK);
+        UtilsJavaFX.showImage(img2, "COLORMAP_PINK");
+        Imgproc.applyColorMap(img, img2, Imgproc.COLORMAP_RAINBOW);
+        UtilsJavaFX.showImage(img2, "COLORMAP_RAINBOW");
+        Imgproc.applyColorMap(img, img2, Imgproc.COLORMAP_SPRING);
+        UtilsJavaFX.showImage(img2, "COLORMAP_SPRING");
+        Imgproc.applyColorMap(img, img2, Imgproc.COLORMAP_SUMMER);
+        UtilsJavaFX.showImage(img2, "COLORMAP_SUMMER");
+        Imgproc.applyColorMap(img, img2, Imgproc.COLORMAP_WINTER);
+        UtilsJavaFX.showImage(img2, "COLORMAP_WINTER");
         img.release();
         img2.release();
-        img3.release();
-        img4.release();
-    }
-
-    private void onClickButton88(ActionEvent e) {
-        //Поиск прямых линий
-        Mat img = Imgcodecs.imread(getClass().getClassLoader().getResource("ElonMusk.jpg").getPath());
-        if (img.empty()) {
-            System.out.println("Не удалось загрузить изображение");
-            return;
-        }
-        Mat imgGray = new Mat();
-        Imgproc.cvtColor(img, imgGray, Imgproc.COLOR_BGR2GRAY);
-        Mat edges = new Mat();
-        Imgproc.Canny(imgGray, edges, 80, 200);
-        UtilsJavaFX.showImage(edges, "Илон Маск с применением Canny");
-        Mat lines = new Mat();
-        Imgproc.HoughLinesP(edges, lines, 1, Math.toRadians(2), 20, 30, 0);
-        Mat result = new Mat(img.size(), CvType.CV_8UC3, UtilsOpenCV.COLOR_WHITE);
-        for (int i = 0, r = lines.rows(); i < r; i++) {
-            for (int j = 0, c = lines.cols(); j < c; j++) {
-                double[] line = lines.get(i, j);
-                Imgproc.line(result, new org.opencv.core.Point(line[0], line[1]),
-                        new Point(line[2], line[3]), UtilsOpenCV.COLOR_BLACK);
-            }
-        }
-        UtilsJavaFX.showImage(result, "Результат поиска прямых линий");
-        img.release();
-        imgGray.release();
-        edges.release();
-        result.release();
-    }
-
-    private void onClickButton99(ActionEvent e) {
-        //Дилатация и жрозия ищображения
-        Mat img = Imgcodecs.imread(getClass().getClassLoader().getResource("ElonMusk.jpg").getPath());
-        if (img.empty()) {
-            System.out.println("Не удалось загрузить изображение");
-            return;
-        }
-        UtilsJavaFX.showImage(img, "Илон Маск");
-        Mat kernel = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new Size(3, 3));
-        Mat img2 = new Mat();
-        Imgproc.dilate(img, img2, kernel);
-        UtilsJavaFX.showImage(img2, "Илон Маск с дилатацией");
-        Mat img3 = new Mat();
-        Imgproc.erode(img, img3, kernel);
-        UtilsJavaFX.showImage(img3, "Илон Маск с эрозией");
     }
 
 }
