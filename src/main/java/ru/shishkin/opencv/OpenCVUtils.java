@@ -10,7 +10,7 @@ import java.awt.image.DataBufferByte;
 import java.io.*;
 import java.util.Arrays;
 
-public class UtilsOpenCV {
+public class OpenCVUtils {
     public static final Scalar COLOR_BLACK = colorRGB(0, 0, 0);
     public static final Scalar COLOR_WHITE = colorRGB(255, 255, 255);
     public static final Scalar COLOR_RED = colorRGB(255, 0, 0);

@@ -11,9 +11,9 @@ import org.opencv.imgproc.Imgproc;
 
 import java.awt.image.BufferedImage;
 
-public class UtilsJavaFX {
+public class JavaFXUtils {
     public static WritableImage MatToWritableImage(Mat m) {
-        BufferedImage bim = UtilsOpenCV.MatToBufferedImage(m);
+        BufferedImage bim = OpenCVUtils.MatToBufferedImage(m);
 
         if (bim == null) {
             return null;

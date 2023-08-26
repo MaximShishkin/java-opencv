@@ -1,7 +1,6 @@
 package ru.shishkin.opencv;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.TextArea;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
@@ -18,10 +17,10 @@ public class OpenCVFilters {
     protected void onClickButton12(Mat img) {
         Mat img2 = new Mat();
         Imgproc.blur(img, img2, new Size(3, 3));
-        UtilsJavaFX.showImage(img2, "Size(3, 3)");
+        JavaFXUtils.showImage(img2, "Size(3, 3)");
         Mat img3 = new Mat();
         Imgproc.blur(img, img3, new Size(45, 45), new Point(-1, -1));
-        UtilsJavaFX.showImage(img3, "Size(45, 45)");
+        JavaFXUtils.showImage(img3, "Size(45, 45)");
         img.release();
         img2.release();
         img3.release();
@@ -35,15 +34,15 @@ public class OpenCVFilters {
             return;
         }
         Mat img2 = new Mat();
-        UtilsJavaFX.showImage(img, "Илон Маск");
+        JavaFXUtils.showImage(img, "Илон Маск");
         Imgproc.medianBlur(img, img2, 3);
-        UtilsJavaFX.showImage(img2, "Илон Маск с параметром фильтра 3");
+        JavaFXUtils.showImage(img2, "Илон Маск с параметром фильтра 3");
         Mat img3 = new Mat();
         Imgproc.medianBlur(img, img3, 5);
-        UtilsJavaFX.showImage(img3, "Илон Маск с параметром фильтра 5");
+        JavaFXUtils.showImage(img3, "Илон Маск с параметром фильтра 5");
         Mat img4 = new Mat();
         Imgproc.medianBlur(img, img4, 45);
-        UtilsJavaFX.showImage(img4, "Илон Маск с параметром фильтра 45");
+        JavaFXUtils.showImage(img4, "Илон Маск с параметром фильтра 45");
         img.release();
         img2.release();
         img3.release();
@@ -61,18 +60,18 @@ public class OpenCVFilters {
         Imgproc.cvtColor(img, imgGray, Imgproc.COLOR_BGR2GRAY);
         Mat edges = new Mat();
         Imgproc.Canny(imgGray, edges, 80, 200);
-        UtilsJavaFX.showImage(edges, "Илон Маск с применением Canny");
+        JavaFXUtils.showImage(edges, "Илон Маск с применением Canny");
         Mat lines = new Mat();
         Imgproc.HoughLinesP(edges, lines, 1, Math.toRadians(2), 20, 30, 0);
-        Mat result = new Mat(img.size(), CvType.CV_8UC3, UtilsOpenCV.COLOR_WHITE);
+        Mat result = new Mat(img.size(), CvType.CV_8UC3, OpenCVUtils.COLOR_WHITE);
         for (int i = 0, r = lines.rows(); i < r; i++) {
             for (int j = 0, c = lines.cols(); j < c; j++) {
                 double[] line = lines.get(i, j);
                 Imgproc.line(result, new org.opencv.core.Point(line[0], line[1]),
-                        new Point(line[2], line[3]), UtilsOpenCV.COLOR_BLACK);
+                        new Point(line[2], line[3]), OpenCVUtils.COLOR_BLACK);
             }
         }
-        UtilsJavaFX.showImage(result, "Результат поиска прямых линий");
+        JavaFXUtils.showImage(result, "Результат поиска прямых линий");
         img.release();
         imgGray.release();
         edges.release();
@@ -86,14 +85,14 @@ public class OpenCVFilters {
             System.out.println("Не удалось загрузить изображение");
             return;
         }
-        UtilsJavaFX.showImage(img, "Илон Маск");
+        JavaFXUtils.showImage(img, "Илон Маск");
         Mat kernel = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new Size(3, 3));
         Mat img2 = new Mat();
         Imgproc.dilate(img, img2, kernel);
-        UtilsJavaFX.showImage(img2, "Илон Маск с дилатацией");
+        JavaFXUtils.showImage(img2, "Илон Маск с дилатацией");
         Mat img3 = new Mat();
         Imgproc.erode(img, img3, kernel);
-        UtilsJavaFX.showImage(img3, "Илон Маск с эрозией");
+        JavaFXUtils.showImage(img3, "Илон Маск с эрозией");
     }
 
     public static void onClickButton1222(ActionEvent e) {
@@ -107,10 +106,10 @@ public class OpenCVFilters {
 
         Mat img2 = new Mat();
         Imgproc.blur(img, img2, new Size(3, 3));
-        UtilsJavaFX.showImage(img2, "Size(3, 3)");
+        JavaFXUtils.showImage(img2, "Size(3, 3)");
         Mat img3 = new Mat();
         Imgproc.blur(img, img3, new Size(45, 45), new Point(-1, -1));
-        UtilsJavaFX.showImage(img3, "Size(45, 45)");
+        JavaFXUtils.showImage(img3, "Size(45, 45)");
         img.release();
         img2.release();
         img3.release();

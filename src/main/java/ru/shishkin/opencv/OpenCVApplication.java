@@ -18,7 +18,7 @@ import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ApplicationOpenCV extends Application {
+public class OpenCVApplication extends Application {
     private TextArea textArea;
 
     static {
@@ -127,8 +127,8 @@ public class ApplicationOpenCV extends Application {
         Mat img3 = new Mat();
         Imgproc.threshold(img2, img3, 100, 255, Imgproc.THRESH_BINARY | Imgproc.THRESH_OTSU);
 
-        UtilsJavaFX.showImage(img, "Илон Маск");
-        UtilsJavaFX.showImage(img3, "Черно-белый Илон Маск");
+        JavaFXUtils.showImage(img, "Илон Маск");
+        JavaFXUtils.showImage(img3, "Черно-белый Илон Маск");
 
         img.release();
         img2.release();
@@ -153,9 +153,9 @@ public class ApplicationOpenCV extends Application {
         Mat img4 = new Mat();
         Imgproc.adaptiveThreshold(img2, img4, 255, Imgproc.ADAPTIVE_THRESH_GAUSSIAN_C, Imgproc.THRESH_BINARY_INV, 3, 5);
 
-        UtilsJavaFX.showImage(img, "Илон Маск");
-        UtilsJavaFX.showImage(img3, "Илонс Маск с ADAPTIVE_THRESH_MEAN_C");
-        UtilsJavaFX.showImage(img4, "Илон Маск с ADAPTIVE_THRESH_GAUSSIAN_C + THRESH_BINARY_INV");
+        JavaFXUtils.showImage(img, "Илон Маск");
+        JavaFXUtils.showImage(img3, "Илонс Маск с ADAPTIVE_THRESH_MEAN_C");
+        JavaFXUtils.showImage(img4, "Илон Маск с ADAPTIVE_THRESH_GAUSSIAN_C + THRESH_BINARY_INV");
 
         // Инверсия с помощью таблицы соответствия
         Mat lut = new Mat(1, 256, CvType.CV_8UC1);
@@ -168,7 +168,7 @@ public class ApplicationOpenCV extends Application {
         // Преобразование в соответствии с таблицей
         Mat imgInv = new Mat();
         Core.LUT(img3, lut, imgInv);
-        UtilsJavaFX.showImage(imgInv, "Илон Маск с ADAPTIVE_THRESH_MEAN_C + инверсия");
+        JavaFXUtils.showImage(imgInv, "Илон Маск с ADAPTIVE_THRESH_MEAN_C + инверсия");
 
         img.release();
         img2.release();
@@ -201,9 +201,9 @@ public class ApplicationOpenCV extends Application {
         Mat imgBGR = new Mat();
         Imgproc.cvtColor(imgHSV, imgBGR, Imgproc.COLOR_HSV2BGR);
 
-        UtilsJavaFX.showImage(img, "Илон Маск");
-        UtilsJavaFX.showImage(imgBGR, "Илон Маск с яркостью +40");
-        UtilsJavaFX.showImage(imgBGR1, "Илон Маск с яркостью -40");
+        JavaFXUtils.showImage(img, "Илон Маск");
+        JavaFXUtils.showImage(imgBGR, "Илон Маск с яркостью +40");
+        JavaFXUtils.showImage(imgBGR1, "Илон Маск с яркостью -40");
 
         img.release();
         imgHSV.release();
@@ -235,9 +235,9 @@ public class ApplicationOpenCV extends Application {
         Mat imgBGR1 = new Mat();
         Imgproc.cvtColor(imgHSV1, imgBGR1, Imgproc.COLOR_HSV2BGR);
 
-        UtilsJavaFX.showImage(img, "Илон Маск");
-        UtilsJavaFX.showImage(imgBGR, "Илон Маск с насыщенностью +40");
-        UtilsJavaFX.showImage(imgBGR1, "Илон Маск с насыщенностью -40");
+        JavaFXUtils.showImage(img, "Илон Маск");
+        JavaFXUtils.showImage(imgBGR, "Илон Маск с насыщенностью +40");
+        JavaFXUtils.showImage(imgBGR1, "Илон Маск с насыщенностью -40");
 
         img.release();
         imgHSV.release();
@@ -269,9 +269,9 @@ public class ApplicationOpenCV extends Application {
         Mat imgBGR1 = new Mat();
         Imgproc.cvtColor(imgLab1, imgBGR1, Imgproc.COLOR_Lab2BGR);
 
-        UtilsJavaFX.showImage(img, "Илон Маск");
-        UtilsJavaFX.showImage(imgBGR, "Синий Илон Маск");
-        UtilsJavaFX.showImage(imgBGR1, "Желтый Илон Маск");
+        JavaFXUtils.showImage(img, "Илон Маск");
+        JavaFXUtils.showImage(imgBGR, "Синий Илон Маск");
+        JavaFXUtils.showImage(imgBGR1, "Желтый Илон Маск");
 
         img.release();
         imgLab.release();
@@ -312,8 +312,8 @@ public class ApplicationOpenCV extends Application {
         Mat img2 = new Mat();
         Core.LUT(img, lut, img2);
 
-        UtilsJavaFX.showImage(img, "Илон Маск");
-        UtilsJavaFX.showImage(img2, "Илон Маск с контрастом: " + contrast);
+        JavaFXUtils.showImage(img, "Илон Маск");
+        JavaFXUtils.showImage(img2, "Илон Маск с контрастом: " + contrast);
 
         img.release();
         img2.release();
@@ -329,10 +329,10 @@ public class ApplicationOpenCV extends Application {
             return;
         }
 
-        Mat m = new Mat(img.rows(), img.cols(), img.type(), UtilsOpenCV.COLOR_WHITE);
+        Mat m = new Mat(img.rows(), img.cols(), img.type(), OpenCVUtils.COLOR_WHITE);
         Mat negative = new Mat();
         Core.subtract(m, img, negative);
-        UtilsOpenCV.showImage(negative, "Негатив");
+        OpenCVUtils.showImage(negative, "Негатив");
         img.release();
         negative.release();
         m.release();
@@ -357,7 +357,7 @@ public class ApplicationOpenCV extends Application {
 
         Mat sepia = new Mat();
         Core.transform(img, sepia, kernel);
-        UtilsOpenCV.showImage(sepia, "Сепия");
+        OpenCVUtils.showImage(sepia, "Сепия");
 
         img.release();
         kernel.release();
@@ -373,7 +373,7 @@ public class ApplicationOpenCV extends Application {
             return;
         }
 
-        UtilsJavaFX.showImage(img, "Оригинал");
+        JavaFXUtils.showImage(img, "Оригинал");
         Mat imgGray = new Mat();
         Imgproc.cvtColor(img, imgGray, Imgproc.COLOR_BGR2GRAY);
 
@@ -399,41 +399,41 @@ public class ApplicationOpenCV extends Application {
         // Отрисовка гистограмм
         double v = 0;
         int h = 150;
-        Mat imgHistRed = new Mat(h, 256, CvType.CV_8UC3, UtilsOpenCV.COLOR_WHITE);
-        Mat imgHistGreen = new Mat(h, 256, CvType.CV_8UC3, UtilsOpenCV.COLOR_WHITE);
-        Mat imgHistBlue = new Mat(h, 256, CvType.CV_8UC3, UtilsOpenCV.COLOR_WHITE);
-        Mat imgHistGray = new Mat(h, 256, CvType.CV_8UC3, UtilsOpenCV.COLOR_WHITE);
+        Mat imgHistRed = new Mat(h, 256, CvType.CV_8UC3, OpenCVUtils.COLOR_WHITE);
+        Mat imgHistGreen = new Mat(h, 256, CvType.CV_8UC3, OpenCVUtils.COLOR_WHITE);
+        Mat imgHistBlue = new Mat(h, 256, CvType.CV_8UC3, OpenCVUtils.COLOR_WHITE);
+        Mat imgHistGray = new Mat(h, 256, CvType.CV_8UC3, OpenCVUtils.COLOR_WHITE);
 
         for (int i = 0, j = histGray.rows(); i < j; i++) {
             v = Math.round(histRed.get(i, 0)[0]);
 
             if (v != 0) {
-                Imgproc.line(imgHistRed, new org.opencv.core.Point(i, h - 1), new org.opencv.core.Point(i, h - 1 - v), UtilsOpenCV.COLOR_RED);
+                Imgproc.line(imgHistRed, new org.opencv.core.Point(i, h - 1), new org.opencv.core.Point(i, h - 1 - v), OpenCVUtils.COLOR_RED);
             }
 
             v = Math.round(histGreen.get(i, 0)[0]);
 
             if (v != 0) {
-                Imgproc.line(imgHistGreen, new org.opencv.core.Point(i, h - 1), new org.opencv.core.Point(i, h - 1 - v), UtilsOpenCV.COLOR_GREEN);
+                Imgproc.line(imgHistGreen, new org.opencv.core.Point(i, h - 1), new org.opencv.core.Point(i, h - 1 - v), OpenCVUtils.COLOR_GREEN);
             }
 
             v = Math.round(histBlue.get(i, 0)[0]);
 
             if (v != 0) {
-                Imgproc.line(imgHistBlue, new org.opencv.core.Point(i, h - 1), new org.opencv.core.Point(i, h - 1 - v), UtilsOpenCV.COLOR_BLUE);
+                Imgproc.line(imgHistBlue, new org.opencv.core.Point(i, h - 1), new org.opencv.core.Point(i, h - 1 - v), OpenCVUtils.COLOR_BLUE);
             }
 
             v = Math.round(histGray.get(i, 0)[0]);
 
             if (v != 0) {
-                Imgproc.line(imgHistGray, new org.opencv.core.Point(i, h - 1), new org.opencv.core.Point(i, h - 1 - v), UtilsOpenCV.COLOR_GRAY);
+                Imgproc.line(imgHistGray, new org.opencv.core.Point(i, h - 1), new org.opencv.core.Point(i, h - 1 - v), OpenCVUtils.COLOR_GRAY);
             }
         }
 
-        UtilsJavaFX.showImage(imgHistRed, "Red");
-        UtilsJavaFX.showImage(imgHistGreen, "Green");
-        UtilsJavaFX.showImage(imgHistBlue, "Blue");
-        UtilsJavaFX.showImage(imgHistGray, "Gray");
+        JavaFXUtils.showImage(imgHistRed, "Red");
+        JavaFXUtils.showImage(imgHistGreen, "Green");
+        JavaFXUtils.showImage(imgHistBlue, "Blue");
+        JavaFXUtils.showImage(imgHistGray, "Gray");
 
         img.release();
         imgGray.release();
@@ -476,25 +476,25 @@ public class ApplicationOpenCV extends Application {
         double v = 0;
         int h = 150;
 
-        Mat imgHist = new Mat(h, 256, CvType.CV_8UC3, UtilsOpenCV.COLOR_WHITE);
-        Mat imgHist2 = new Mat(h, 256, CvType.CV_8UC3, UtilsOpenCV.COLOR_WHITE);
+        Mat imgHist = new Mat(h, 256, CvType.CV_8UC3, OpenCVUtils.COLOR_WHITE);
+        Mat imgHist2 = new Mat(h, 256, CvType.CV_8UC3, OpenCVUtils.COLOR_WHITE);
 
         for (int i = 0, j = hist.rows(); i < j; i++) {
             v = Math.round(hist.get(i, 0)[0]);
             if (v != 0) {
-                Imgproc.line(imgHist, new Point(i, h - 1), new Point(i, h - 1 - v), UtilsOpenCV.COLOR_BLACK);
+                Imgproc.line(imgHist, new Point(i, h - 1), new Point(i, h - 1 - v), OpenCVUtils.COLOR_BLACK);
             }
 
             v = Math.round(hist2.get(i, 0)[0]);
             if (v != 0) {
-                Imgproc.line(imgHist2, new Point(i, h - 1), new Point(i, h - 1 - v), UtilsOpenCV.COLOR_BLACK);
+                Imgproc.line(imgHist2, new Point(i, h - 1), new Point(i, h - 1 - v), OpenCVUtils.COLOR_BLACK);
             }
         }
 
-        UtilsJavaFX.showImage(img2, "Оригинал");
-        UtilsJavaFX.showImage(imgHist, "Гистограмма до");
-        UtilsJavaFX.showImage(img3, "equalizeHist");
-        UtilsJavaFX.showImage(imgHist2, "Гистограмма после");
+        JavaFXUtils.showImage(img2, "Оригинал");
+        JavaFXUtils.showImage(imgHist, "Гистограмма до");
+        JavaFXUtils.showImage(img3, "equalizeHist");
+        JavaFXUtils.showImage(imgHist2, "Гистограмма после");
 
         img.release();
         img2.release();
@@ -535,25 +535,25 @@ public class ApplicationOpenCV extends Application {
         double v = 0;
         int h = 150;
 
-        Mat imgHist = new Mat(h, 256, CvType.CV_8UC3, UtilsOpenCV.COLOR_WHITE);
-        Mat imgHist2 = new Mat(h, 256, CvType.CV_8UC3, UtilsOpenCV.COLOR_WHITE);
+        Mat imgHist = new Mat(h, 256, CvType.CV_8UC3, OpenCVUtils.COLOR_WHITE);
+        Mat imgHist2 = new Mat(h, 256, CvType.CV_8UC3, OpenCVUtils.COLOR_WHITE);
 
         for (int i = 0, j = hist.rows(); i < j; i++) {
             v = Math.round(hist.get(i, 0)[0]);
             if (v != 0) {
-                Imgproc.line(imgHist, new org.opencv.core.Point(i, h - 1), new org.opencv.core.Point(i, h - 1 - v), UtilsOpenCV.COLOR_BLACK);
+                Imgproc.line(imgHist, new org.opencv.core.Point(i, h - 1), new org.opencv.core.Point(i, h - 1 - v), OpenCVUtils.COLOR_BLACK);
             }
 
             v = Math.round(hist2.get(i, 0)[0]);
             if (v != 0) {
-                Imgproc.line(imgHist2, new org.opencv.core.Point(i, h - 1), new org.opencv.core.Point(i, h - 1 - v), UtilsOpenCV.COLOR_BLACK);
+                Imgproc.line(imgHist2, new org.opencv.core.Point(i, h - 1), new org.opencv.core.Point(i, h - 1 - v), OpenCVUtils.COLOR_BLACK);
             }
         }
 
-        UtilsJavaFX.showImage(img2, "Оригинал");
-        UtilsJavaFX.showImage(imgHist, "Гистограмма до");
-        UtilsJavaFX.showImage(img3, "CLAHE");
-        UtilsJavaFX.showImage(imgHist2, "Гистограмма после");
+        JavaFXUtils.showImage(img2, "Оригинал");
+        JavaFXUtils.showImage(imgHist, "Гистограмма до");
+        JavaFXUtils.showImage(img3, "CLAHE");
+        JavaFXUtils.showImage(imgHist2, "Гистограмма после");
 
         img.release();
         img2.release();
@@ -575,35 +575,35 @@ public class ApplicationOpenCV extends Application {
 
         System.out.println(img.size());
         Imgproc.resize(img, img, new Size(), 0.6, 0.6, Imgproc.INTER_LINEAR);
-        UtilsJavaFX.showImage(img, "Оригинал");
+        JavaFXUtils.showImage(img, "Оригинал");
 
         Mat img2 = new Mat();
         Imgproc.applyColorMap(img, img2, Imgproc.COLORMAP_AUTUMN);
-        UtilsJavaFX.showImage(img2, "COLORMAP_AUTUMN");
+        JavaFXUtils.showImage(img2, "COLORMAP_AUTUMN");
         Imgproc.applyColorMap(img, img2, Imgproc.COLORMAP_BONE);
-        UtilsJavaFX.showImage(img2, "COLORMAP_BONE");
+        JavaFXUtils.showImage(img2, "COLORMAP_BONE");
         Imgproc.applyColorMap(img, img2, Imgproc.COLORMAP_COOL);
-        UtilsJavaFX.showImage(img2, "COLORMAP_COOL");
+        JavaFXUtils.showImage(img2, "COLORMAP_COOL");
         Imgproc.applyColorMap(img, img2, Imgproc.COLORMAP_HOT);
-        UtilsJavaFX.showImage(img2, "COLORMAP_HOT");
+        JavaFXUtils.showImage(img2, "COLORMAP_HOT");
         Imgproc.applyColorMap(img, img2, Imgproc.COLORMAP_HSV);
-        UtilsJavaFX.showImage(img2, "COLORMAP_HSV");
+        JavaFXUtils.showImage(img2, "COLORMAP_HSV");
         Imgproc.applyColorMap(img, img2, Imgproc.COLORMAP_JET);
-        UtilsJavaFX.showImage(img2, "COLORMAP_JET");
+        JavaFXUtils.showImage(img2, "COLORMAP_JET");
         Imgproc.applyColorMap(img, img2, Imgproc.COLORMAP_OCEAN);
-        UtilsJavaFX.showImage(img2, "COLORMAP_OCEAN");
+        JavaFXUtils.showImage(img2, "COLORMAP_OCEAN");
         Imgproc.applyColorMap(img, img2, Imgproc.COLORMAP_PARULA);
-        UtilsJavaFX.showImage(img2, "COLORMAP_PARULA");
+        JavaFXUtils.showImage(img2, "COLORMAP_PARULA");
         Imgproc.applyColorMap(img, img2, Imgproc.COLORMAP_PINK);
-        UtilsJavaFX.showImage(img2, "COLORMAP_PINK");
+        JavaFXUtils.showImage(img2, "COLORMAP_PINK");
         Imgproc.applyColorMap(img, img2, Imgproc.COLORMAP_RAINBOW);
-        UtilsJavaFX.showImage(img2, "COLORMAP_RAINBOW");
+        JavaFXUtils.showImage(img2, "COLORMAP_RAINBOW");
         Imgproc.applyColorMap(img, img2, Imgproc.COLORMAP_SPRING);
-        UtilsJavaFX.showImage(img2, "COLORMAP_SPRING");
+        JavaFXUtils.showImage(img2, "COLORMAP_SPRING");
         Imgproc.applyColorMap(img, img2, Imgproc.COLORMAP_SUMMER);
-        UtilsJavaFX.showImage(img2, "COLORMAP_SUMMER");
+        JavaFXUtils.showImage(img2, "COLORMAP_SUMMER");
         Imgproc.applyColorMap(img, img2, Imgproc.COLORMAP_WINTER);
-        UtilsJavaFX.showImage(img2, "COLORMAP_WINTER");
+        JavaFXUtils.showImage(img2, "COLORMAP_WINTER");
         img.release();
         img2.release();
     }
