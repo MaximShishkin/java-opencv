@@ -94,24 +94,4 @@ public class OpenCVFilters {
         Imgproc.erode(img, img3, kernel);
         JavaFXUtils.showImage(img3, "Илон Маск с эрозией");
     }
-
-    public static void onClickButton1222(ActionEvent e) {
-        TextArea textArea = new TextArea("D:\\Files\\MakShish\\Desktop\\ElonMusk.jpg");
-        Mat img = Imgcodecs.imread(textArea.getText());
-
-        if (img.empty()) {
-            JOptionPane.showMessageDialog(null, "Неверно указан путь!", "Ошибка", 0);
-            return;
-        }
-
-        Mat img2 = new Mat();
-        Imgproc.blur(img, img2, new Size(3, 3));
-        JavaFXUtils.showImage(img2, "Size(3, 3)");
-        Mat img3 = new Mat();
-        Imgproc.blur(img, img3, new Size(45, 45), new Point(-1, -1));
-        JavaFXUtils.showImage(img3, "Size(45, 45)");
-        img.release();
-        img2.release();
-        img3.release();
-    }
 }

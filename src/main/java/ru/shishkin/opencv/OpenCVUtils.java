@@ -234,7 +234,6 @@ public class OpenCVUtils {
 
     public static void showImage(Mat img, String title) {
         BufferedImage im = MatToBufferedImage(img);
-
         if (im == null) {
             return;
         }

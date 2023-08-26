@@ -14,7 +14,6 @@ import java.awt.image.BufferedImage;
 public class JavaFXUtils {
     public static WritableImage MatToWritableImage(Mat m) {
         BufferedImage bim = OpenCVUtils.MatToBufferedImage(m);
-
         if (bim == null) {
             return null;
         } else {
@@ -84,7 +83,6 @@ public class JavaFXUtils {
 
     public static void showImage(Mat img, String title) {
         Image im = MatToImageFX(img);
-
         Stage window = new Stage();
         ScrollPane sp = new ScrollPane();
         ImageView iv = new ImageView();
