@@ -91,7 +91,6 @@ public class UtilsJavaFX {
 
         if (im != null) {
             iv.setImage(im);
-
             if (im.getWidth() < 1000) {
                 sp.setPrefWidth(im.getWidth() + 5);
             } else {

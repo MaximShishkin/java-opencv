@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.opencv.core.*;
 import org.opencv.imgcodecs.Imgcodecs;
@@ -89,13 +88,15 @@ public class ApplicationOpenCV extends Application {
         button9.setOnAction(this::onClickButton9);
         root.getChildren().add(button9);
 
-        // Адаптивное выравнивание гистограммы с помощью алгоритма CLAHE (6.9)
-        Button button10 = new Button("Выравнивание гистограммы с CLAHE");
+        // Алгоритм CLAHE (6.9)
+        Button button10 = new Button("Алгоритм CLAHE");
         button10.setOnAction(this::onClickButton10);
         root.getChildren().add(button10);
 
-
-        // Вычисление гистограммы (6.10)
+        // Адаптивное выравнивание гистограммы с помощью алгоритма CLAHE (6.9)
+        Button button11 = new Button("Выравнивание гистограммы с CLAHE");
+        button11.setOnAction(this::onClickButton11);
+        root.getChildren().add(button11);
 
         Scene scene = new Scene(root, 350.0, 500.0);
         stage.setTitle("OpenCV " + Core.VERSION);
@@ -499,7 +500,7 @@ public class ApplicationOpenCV extends Application {
         hist2.release();
     }
 
-    // Адаптивное выравнивание гистограммы с помощью алгоритма CLAHE (6.9)
+    // Алгоритм CLAHE (6.9)
     private void onClickButton10(ActionEvent e) {
         Mat img = Imgcodecs.imread(textArea.getText());
 
@@ -516,13 +517,15 @@ public class ApplicationOpenCV extends Application {
         clane.apply(img2, img3);
     }
 
-    private void onClickButton66(ActionEvent e) {
-        //Изменение гистрограммы
-        Mat img = Imgcodecs.imread(getClass().getClassLoader().getResource("ElonMusk.jpg").getPath());
+    // Адаптивное выравнивание гистограммы с помощью алгоритма CLAHE (6.9)
+    private void onClickButton11(ActionEvent e) {
+        Mat img = Imgcodecs.imread(textArea.getText());
+
         if (img.empty()) {
-            System.out.println("Не удалось загрузить изображение");
+            JOptionPane.showMessageDialog(null, "Неверно указан путь!", "Ошибка", 0);
             return;
         }
+
         Mat img2 = new Mat();
         Imgproc.cvtColor(img, img2, Imgproc.COLOR_BGR2GRAY);
         Mat img3 = new Mat();
@@ -536,32 +539,34 @@ public class ApplicationOpenCV extends Application {
         images.add(img3);
         Mat hist = new Mat();
         Mat hist2 = new Mat();
-        Imgproc.calcHist(images, new MatOfInt(0), new Mat(),
-                hist, new MatOfInt(256), new MatOfFloat(0, 256));
-        Imgproc.calcHist(images, new MatOfInt(1), new Mat(),
-                hist2, new MatOfInt(256), new MatOfFloat(0, 256));
+        Imgproc.calcHist(images, new MatOfInt(0), new Mat(), hist, new MatOfInt(256), new MatOfFloat(0, 256));
+        Imgproc.calcHist(images, new MatOfInt(1), new Mat(), hist2, new MatOfInt(256), new MatOfFloat(0, 256));
         Core.normalize(hist, hist, 0, 128, Core.NORM_MINMAX);
         Core.normalize(hist2, hist2, 0, 128, Core.NORM_MINMAX);
+
         double v = 0;
         int h = 150;
+
         Mat imgHist = new Mat(h, 256, CvType.CV_8UC3, UtilsOpenCV.COLOR_WHITE);
         Mat imgHist2 = new Mat(h, 256, CvType.CV_8UC3, UtilsOpenCV.COLOR_WHITE);
+
         for (int i = 0, j = hist.rows(); i < j; i++) {
             v = Math.round(hist.get(i, 0)[0]);
             if (v != 0) {
-                Imgproc.line(imgHist, new org.opencv.core.Point(i, h - 1),
-                        new org.opencv.core.Point(i, h - 1 - v), UtilsOpenCV.COLOR_BLACK);
+                Imgproc.line(imgHist, new org.opencv.core.Point(i, h - 1), new org.opencv.core.Point(i, h - 1 - v), UtilsOpenCV.COLOR_BLACK);
             }
+
             v = Math.round(hist2.get(i, 0)[0]);
             if (v != 0) {
-                Imgproc.line(imgHist2, new org.opencv.core.Point(i, h - 1),
-                        new org.opencv.core.Point(i, h - 1 - v), UtilsOpenCV.COLOR_BLACK);
+                Imgproc.line(imgHist2, new org.opencv.core.Point(i, h - 1), new org.opencv.core.Point(i, h - 1 - v), UtilsOpenCV.COLOR_BLACK);
             }
         }
+
         UtilsJavaFX.showImage(img2, "Оригинал");
         UtilsJavaFX.showImage(imgHist, "Гистограмма до");
         UtilsJavaFX.showImage(img3, "CLAHE");
         UtilsJavaFX.showImage(imgHist2, "Гистограмма после");
+
         img.release();
         img2.release();
         img3.release();

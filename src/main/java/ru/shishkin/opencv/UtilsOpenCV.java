@@ -115,7 +115,8 @@ public class UtilsOpenCV {
         byte[] buf = Arrays.copyOf(data, data.length);
         byte tmp = 0;
 
-        for (int i = 0; i < buf.length; i += 4) { // ABGR => BGRA
+        // ABGR => BGRA
+        for (int i = 0; i < buf.length; i += 4) {
             tmp = buf[i];
             buf[i] = buf[i + 1];
             buf[i + 1] = buf[i + 2];
