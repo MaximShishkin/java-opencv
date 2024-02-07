@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="opencv" target="15" />
+      <module name="opencv" target="21" />
     </bytecodeTargetLevel>
   </component>
 </project>
